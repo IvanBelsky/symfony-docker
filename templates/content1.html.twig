@@ -1,0 +1,7 @@
+{% extends 'base.html.twig' %}
+        {% block content %}
+          <h1>Inherited text content1</h1>
+          здесь использовано наследование в Twig
+          после этой строки идет вызов parent()
+          {{parent()}}
+        {% endblock %}

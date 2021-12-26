@@ -1,3 +1,42 @@
 #index:
 #    path: /
 #    controller: App\Controller\DefaultController::index
+
+any_name:
+    path: /api/admin
+    methods: GET
+    controller: App\Controller\DefaultController::index1
+
+any_name_2:
+    path: /api/admin2
+    methods: GET
+    controller: App\Controller\DefaultController::index
+
+any_name_3:
+    path: /api/admin2
+    methods: POST
+    controller: App\Controller\DefaultController::index3
+
+any_my_name_4:
+    path: /api/4
+    methods: GET
+    controller: App\Controller\DefaultController::index4
+
+any_my_name_5:
+    path: /api/5
+    methods: GET
+    controller: App\Controller\DefaultController::content1
+
+#createUser:
+#    path: /create-user
+#    controller: App\Controller\DefaultController::createUser
+
+app.swagger_ui:
+    path: /api/doc
+    methods: GET
+    defaults: { _controller: nelmio_api_doc.controller.swagger_ui }
+
+app.swagger:
+    path: /api/doc.json
+    methods: GET
+    defaults: { _controller: nelmio_api_doc.controller.swagger }
