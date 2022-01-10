@@ -4,7 +4,9 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Repository\UserRepository;
+use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -12,6 +14,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Nelmio\ApiDocBundle\Annotation\Model;
 use Nelmio\ApiDocBundle\Annotation\Security;
 use OpenApi\Annotations as OA;
+use Symfony\Component\Serializer\SerializerInterface;
 
 
 class DefaultController extends AbstractController
@@ -31,9 +34,27 @@ class DefaultController extends AbstractController
      * @Security(name="Bearer")
      *
      */
-    public function index3()
+    public function index3(ManagerRegistry $doctrine): Response
     {
-        return new Response('content sdfmsdfsdf');
+        $entityManager = $doctrine->getManager();
+
+        $user = new User();
+        $user->setEmail('mosts@tut.by');
+        $user->setPassword('qwe');
+        $user->setDateCreated(new \DateTime());
+        $user->setAge(18);
+        $user->setFirstName('Ivan');
+        $user->setIsActive(true);
+        $user->setRoles([]);
+
+
+        // tell Doctrine you want to (eventually) save the Product (no queries yet)
+        $entityManager->persist($user);
+
+        // actually executes the queries (i.e. the INSERT query)
+        $entityManager->flush();
+
+        return new Response('Saved new product with id '.$user->getId().'  '.$user->getFirstName());
     }
 
     /**
@@ -51,15 +72,35 @@ class DefaultController extends AbstractController
      * @Security(name="Bearer")
      *
      */
-    public function index4()
+    public function index4(ManagerRegistry $doctrine, SerializerInterface $serializer): JsonResponse
     {
-        $items = [
+        $userRepository = $doctrine->getRepository(User::class);
+        //$listUsers = $userRepository->findAll();
+        $user = $userRepository->find(1);
+
+        //   $listUsersArray = $serializer->deserialize($listUsers);
+        /** @var User $user */
+
+        $listUsersArray = [];
+//        foreach ($listUsers as $user) {
+            //if ($user->getId()=1)
+            $listUsersArray[] = [
+                'id' => $user->getId(),
+                'name' => $user->getFirstName()
+            ];
+
+  //      }
+
+        return new JsonResponse($listUsersArray);
+
+      /*  $items = [
             ['name' => 'wer', 'age' => 10],
             ['name' => 'hghj', 'age' => 17],
             ['name' => 'spencer', 'age' => 120],
             ['name' => 'vcbcvb', 'age' => 110],
         ];
         return $this->render('base.html.twig',['items'=>$items]);
+      */
     }
 
     /**
@@ -104,9 +145,23 @@ class DefaultController extends AbstractController
      * @Security(name="Bearer")
      *
      */
-    public function index()
+    public function index(ManagerRegistry $doctrine, SerializerInterface $serializer): JsonResponse
     {
-        return new Response('content');
+        $userRepository = $doctrine->getRepository(User::class);
+        $listUsers = $userRepository->findAll();
+
+       //   $listUsersArray = $serializer->deserialize($listUsers);
+        /** @var User $user */
+        $listUsersArray = [];
+        foreach ($listUsers as $user) {
+            $listUsersArray[] = [
+                'id' => $user->getId(),
+                'name' => $user->getFirstName()
+            ];
+
+        }
+        return new JsonResponse($listUsersArray);
+
     }
 
     /**
