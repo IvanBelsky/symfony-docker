@@ -72,12 +72,20 @@ class DefaultController extends AbstractController
      * @Security(name="Bearer")
      *
      */
-    public function index4(ManagerRegistry $doctrine, SerializerInterface $serializer): JsonResponse
+    /**
+     * @Route("/api/{id}", name="show_by_id", methods={"GET"})
+     */
+    public function index4(int $id, ManagerRegistry $doctrine, SerializerInterface $serializer): JsonResponse
     {
         $userRepository = $doctrine->getRepository(User::class);
         //$listUsers = $userRepository->findAll();
-        $user = $userRepository->find(1);
+       // $user = $userRepository->find(1);
+       // $show_by_id = 1;
 
+        if($id == null){exit; };
+        //exit;
+        $user = $userRepository->findOneBy(['id' => $id]);
+        if($user == null){return new JsonResponse(['id'=>'No']); exit; };
         //   $listUsersArray = $serializer->deserialize($listUsers);
         /** @var User $user */
 
@@ -86,7 +94,8 @@ class DefaultController extends AbstractController
             //if ($user->getId()=1)
             $listUsersArray[] = [
                 'id' => $user->getId(),
-                'name' => $user->getFirstName()
+                'name' => $user->getFirstName(),
+                'email' =>$user->getEmail()
             ];
 
   //      }
