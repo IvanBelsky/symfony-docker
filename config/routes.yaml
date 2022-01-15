@@ -5,27 +5,42 @@
 any_name:
     path: /api/admin
     methods: GET
-    controller: App\Controller\DefaultController::index1
+    controller: App\Controller\DefaultController::admin_1
 
 any_name_2:
     path: /api/admin2
     methods: GET
-    controller: App\Controller\DefaultController::index
+    controller: App\Controller\DefaultController::admin_2_get
 
 any_name_3:
     path: /api/admin2
     methods: POST
-    controller: App\Controller\DefaultController::index3
+    controller: App\Controller\DefaultController::admin_2_post_gen_user
 
 any_my_name_4:
-    path: /api/4
+    path: /api/user/show/{id}
     methods: GET
-    controller: App\Controller\DefaultController::index4
+    controller: App\Controller\DefaultController::showById
 
 any_my_name_5:
-    path: /api/5
+    path: /api/user/{id}
+    methods: DELETE
+    controller: App\Controller\DefaultController::deleteById
+
+any_my_name_6:
+    path: /index
     methods: GET
-    controller: App\Controller\DefaultController::content1
+    controller: App\Controller\DefaultController::index
+
+any_my_name_7:
+    path: /add
+    methods: GET
+    controller: App\Controller\DefaultController::addUser
+
+show_users:
+    path: /showUsers
+    methods: GET
+    controller: App\Controller\DefaultController::showUsers
 
 #createUser:
 #    path: /create-user
