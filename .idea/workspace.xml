@@ -1,19 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="5dfa24a9-5e08-48fe-ab76-94f7600531fd" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/DataOperations/DataManager/UserDataManager.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/DataOperations/DataProvider/UserDataProvider.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/bundles.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/bundles.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/routes.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/routes.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/DefaultController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/DefaultController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/symfony.lock" beforeDir="false" afterPath="$PROJECT_DIR$/symfony.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/base.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/content1.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/content1.html.twig" afterDir="false" />
-    </list>
+    <list default="true" id="5dfa24a9-5e08-48fe-ab76-94f7600531fd" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -414,12 +402,12 @@
       <workItem from="1642010969246" duration="10115000" />
       <workItem from="1642096345064" duration="6129000" />
       <workItem from="1642182306610" duration="9629000" />
-      <workItem from="1642238234923" duration="7574000" />
+      <workItem from="1642238234923" duration="8333000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="107786000" />
+    <option name="totallyTimeSpent" value="108545000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="67" y="27" width="1373" height="873" extended-state="6" />

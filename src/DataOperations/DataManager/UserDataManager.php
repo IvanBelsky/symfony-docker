@@ -15,6 +15,9 @@ class UserDataManager
         $this->entityManager = $entityManager;
     }
 
+    /**
+     * @param User $user
+     */
     public function delete(User $user): void
     {
         $this->entityManager->remove($user);
