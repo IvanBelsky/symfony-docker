@@ -8,3 +8,4 @@
 /vendor/
 ###< symfony/framework-bundle ###
 /.docker/.env.nginx.local
+/.idea/
