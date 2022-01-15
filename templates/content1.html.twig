@@ -1,7 +1,29 @@
 {% extends 'base.html.twig' %}
+
+{% block body %}
+
+  Таблица всех пользователей
+
+  {% for item in items %}
+
+    <!-- Меню     Name: {{item.name | upper}} id: {{item.id}} <br>  -->
+  {% endfor %}
+
+
+  <button onclick="document.location='/add2'">Переход2 по ссылке</button>
+{% endblock %}
+
         {% block content %}
           <h1>Inherited text content1</h1>
           здесь использовано наследование в Twig
-          после этой строки идет вызов parent()
-          {{parent()}}
+          после этой строки идет вызов
+
+
+
+
+          <form action="/api/admin2" method="POST">
+
+          <p style="text-align: center"><button > Добавление/удаление пользователей</button> </p>
+</form>
+
         {% endblock %}
