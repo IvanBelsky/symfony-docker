@@ -32,11 +32,6 @@ class UserIpLog
      */
     private $dateCreated;
 
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $userId;
-
     public function __construct()
     {
     }
@@ -61,17 +56,6 @@ class UserIpLog
         return $this;
     }
 
-    public function getUserId(): int
-    {
-        return $this->userId;
-    }
-
-    public function setUserId(int $userId): self
-    {
-        $this->userId = $userId;
-        return $this;
-    }
-
     public function getIpAdr(): ?string
     {
         return $this->ipAdr;
@@ -80,7 +64,6 @@ class UserIpLog
     public function setIpAdr(string $ipAdr): self
     {
         $this->ipAdr = $ipAdr;
-
         return $this;
     }
 

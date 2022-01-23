@@ -38,43 +38,13 @@ class DefaultController extends AbstractController
      * @Security(name="Bearer")
      *
      */
-    public function genUser(ManagerRegistry $doctrine, bool $ipLog=false): Response
+    public function genUser(UserDataManager $userDataManager, Request $request): Response
     {
-        $entityManager = $doctrine->getManager();
-        $user = new User();
-        $user->setEmail('mosts'.rand().'@tut.by');
-        $user->setPassword('qwe'.rand());
-        $user->setDateCreated(new \DateTime());
-        $user->setAge(rand(18,120));
-        $user->setFirstName('Ivan_'.rand(1,500));
-        $user->setIsActive(true);
-        $user->setRoles([]);
-
-        // tell Doctrine you want to (eventually) save the Product (no queries yet)
-        $entityManager->persist($user);
-
-        // actually executes the queries (i.e. the INSERT query)
-        $entityManager->flush();
-        if($ipLog) {
-            return new Response('Create a new record with id '
-                .$user->getId().'  '.$user->getFirstName().'  and ip = '.$this->genIpLog($doctrine,$user->getId()));
-        }
-        else {
-               return new Response('Create a new record with id '
-                   .$user->getId().'  '.$user->getFirstName());
-            }
-    }
-
-    public function genIpLog(ManagerRegistry $doctrine, int $userId):string
-    {
-        $entityManager = $doctrine->getManager();
-        $userIpLog = new UserIpLog();
-        $userIpLog->setDateCreated(new \DateTime());
-        $userIpLog->setIpAdr('192.168.58.'.rand(1,254));
-        $userIpLog->setUserId(17);
-        $entityManager->persist($userIpLog);
-        $entityManager->flush();
-        return $userIpLog->getIpAdr().'   id='.$userIpLog->getUserId();
+        $parameters = $request->query->all();
+        $isLog = (int)$parameters['isLog'];
+        $user = $userDataManager->addUser((bool)$isLog);
+        return new Response('Create a new record with id '
+            .$user->getId().'  '.$user->getFirstName() . ($isLog ? 'with ip' : ''));
     }
 
     /**
@@ -145,28 +115,6 @@ class DefaultController extends AbstractController
 
 
         return new Response('delete пользователя');
-    }
-
-
-    /**
-     * List the rewards of the specified user.
-     *
-     * This call takes into account all confirmed awards, but not pending or refused awards.
-     *
-     * @OA\Parameter(
-     *     name="order",
-     *     in="query",
-     *     description="The field used to order rewards",
-     *     @OA\Schema(type="string")
-     * )
-     * @OA\Tag(name="ind")
-     * @Security(name="Bearer")
-     *
-     */
-    public function genUserWithIpLog(ManagerRegistry $doctrine): Response
-    {
-        return new Response($this->genUser($doctrine, true));
-
     }
 
     /**

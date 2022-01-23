@@ -19,12 +19,12 @@
   </table>
 
 
-  <form action="/api/genUser" method="POST">
+  <form action="{{ path('gen_user', { 'isLog': 0}) }}" method="POST">
 
     <p style="text-align: center"><button > Добавление пользователя</button> </p>
   </form>
 
-  <form action="/api/genUserWithIpLog" method="POST">
+  <form action="{{ path('gen_user', { 'isLog': 1}) }}" method="POST">
 
     <p style="text-align: center"><button > Добавление пользователя c логами IP</button> </p>
   </form>

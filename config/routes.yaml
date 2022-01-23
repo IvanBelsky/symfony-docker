@@ -7,13 +7,8 @@ any_name:
     methods: GET
     controller: App\Controller\DefaultController::admin_1
 
-gen_user_with_iplog:
-    path: /api/genUserWithIpLog
-    methods: POST
-    controller: App\Controller\DefaultController::genUserWithIpLog
-
 gen_user:
-    path: /api/genUser
+    path: /api/genUserWithIpLog
     methods: POST
     controller: App\Controller\DefaultController::genUser
 
