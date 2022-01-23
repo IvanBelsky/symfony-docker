@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: andrey
- * Date: 23.01.22
- * Time: 16:46
- */
 
 namespace App\DataOperations\DataManager;
 

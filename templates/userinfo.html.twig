@@ -2,30 +2,25 @@
 {% import "macro/core.twig" as core %}
 {% block body %}
 
-  Таблица всех пользователей
+  Информация по пользователю {{item.name | upper}}  id={{item.id}}
   <table>
-  {% for item in items %}
-  <tr>
-    <td>Name: {{item.name | upper}}</td>
-    <td>IP: {{item.ipAdr}}</td>
-    <td>Id: {{item.id}} -</td>
-    <td><form action="{{ path('show_user_by_id', { 'id': item.id}) }}"
-              method="POST">
-        <button>show user</button>
-      </form>
-    </td>
-    <td><form action="{{ path('gen_comment_by_id', { 'id': item.id}) }}"
-              method="POST">
-        <button>add comment</button>
-      </form>
-    </td>
-    <td><form action="{{ path('delete_user_by_id', { 'id': item.id}) }}"
-              method="POST">
-        <button>delete</button>
-      </form>
-    </td>
-  </tr>
-  {% endfor %}
+    {% for item in items %}
+      <tr>
+        <td>Name: {{item.name | upper}}</td>
+        <td>IP: {{item.ipAdr}}</td>
+        <td>Id: {{item.id}} -</td>
+        <td><form action="{{ path('show_user_by_id', { 'id': item.id}) }}"
+                  method="POST">
+            <button>show user</button>
+          </form>
+        </td>
+        <td><form action="{{ path('delete_user_by_id', { 'id': item.id}) }}"
+                  method="POST">
+            <button>delete</button>
+          </form>
+        </td>
+      </tr>
+    {% endfor %}
   </table>
 
 
@@ -33,7 +28,6 @@
 
     <p style="text-align: center"><button > Добавление пользователя</button> </p>
   </form>
-
 
   <form action="{{ path('gen_user', { 'isLog': 1}) }}" method="POST">
 
@@ -51,8 +45,8 @@
           после этой строки идет вызов
           <form action="/api/admin2" method="POST">
 
-          <p style="text-align: center"><button > Добавление/удаление пользователей</button> </p>
-</form>
+            <p style="text-align: center"><button > Добавление/удаление пользователей</button> </p>
+          </form>
 
-{% endblock %}
+        {% endblock %}
 

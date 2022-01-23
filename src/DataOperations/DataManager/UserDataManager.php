@@ -3,6 +3,7 @@
 namespace App\DataOperations\DataManager;
 
 
+use App\Entity\Comment;
 use App\Entity\User;
 use App\Entity\UserIpLog;
 use Doctrine\ORM\EntityManagerInterface;
@@ -10,13 +11,15 @@ use Doctrine\ORM\EntityManagerInterface;
 class UserDataManager
 {
     private $entityManager;
-
     private $userIpLogDataManager;
+    private $userCommentDataManager;
 
-    public function __construct(EntityManagerInterface $entityManager, UserIpLogDataManager $userIpLogDataManager)
+    public function __construct(EntityManagerInterface $entityManager,
+                       UserIpLogDataManager $userIpLogDataManager, UserCommentDataManager $userCommentDataManager)
     {
         $this->entityManager = $entityManager;
         $this->userIpLogDataManager = $userIpLogDataManager;
+        $this->userCommentDataManager = $userCommentDataManager;
     }
 
     /**
@@ -45,6 +48,11 @@ class UserDataManager
            $this->userIpLogDataManager->addIpLog($user);
         }
         return $user;
+
+    }
+
+    public function addUserComment(User $user, string $comment):Comment
+    {
 
     }
 }

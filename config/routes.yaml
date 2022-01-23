@@ -12,10 +12,15 @@ gen_user:
     methods: POST
     controller: App\Controller\DefaultController::genUser
 
-any_my_name_4:
+show_user_by_id:
     path: /api/user/show/{id}
-    methods: GET
+    methods: POST
     controller: App\Controller\DefaultController::showById
+
+gen_comment_by_id:
+    path: /api/genCommentById
+    methods: POST
+    controller: App\Controller\DefaultController::genComment
 
 delete_user_by_id:
     path: /api/user/{id}

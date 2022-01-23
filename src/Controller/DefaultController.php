@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\DataOperations\DataManager\UserCommentDataManager;
 use App\DataOperations\DataManager\UserDataManager;
 use App\DataOperations\DataProvider\UserDataProvider;
 use App\Entity\User;
@@ -62,45 +63,27 @@ class DefaultController extends AbstractController
      * @Security(name="Bearer")
      *
      */
-    public function showById(int $id, ManagerRegistry $doctrine, SerializerInterface $serializer): JsonResponse
+    public function showById(UserDataProvider $userDataProvider, User $user): JsonResponse
     {
-        $userRepository = $doctrine->getRepository(User::class);
-        //$listUsers = $userRepository->findAll();
-       // $user = $userRepository->find(1);
-       // $show_by_id = 1;
-
-        if($id == null){exit; };
-        //exit;
-        $user = $userRepository->findOneBy(['id' => $id]);
-        if($user == null){return new JsonResponse(['id'=>'No']); exit; };
-        //   $listUsersArray = $serializer->deserialize($listUsers);
-        /** @var User $user */
-
-        $listUsersArray = [];
-//        foreach ($listUsers as $user) {
-            //if ($user->getId()=1)
-            $listUsersArray[] = [
-                'id' => $user->getId(),
-                'name' => $user->getFirstName(),
-                'email' =>$user->getEmail()
-            ];
-
-  //      }
-
-        return new JsonResponse($listUsersArray);
-
-      /*  $items = [
-            ['name' => 'wer', 'age' => 10],
-            ['name' => 'hghj', 'age' => 17],
-            ['name' => 'spencer', 'age' => 120],
-            ['name' => 'vcbcvb', 'age' => 110],
-        ];
-        return $this->render('base.html.twig',['items'=>$items]);
-      */
+        $id = $user->getId();
+        $resp = $userDataProvider->showUserById($id);
+      return new JsonResponse($resp);
     }
 
 
-    /**
+    public function genComment(UserCommentDataManager $userCommentDataManager, Request $request): JsonResponse
+    {
+        //  $id = $user->getId();
+        $parameters = $request->query->all();
+        $id = (int)$parameters['id'];
+        $user = $userCommentDataManager->
+
+        $resp = $userCommentDataManager->addComment($user);
+
+        return new JsonResponse($resp);
+    }
+
+        /**
      * @Entity("$user", expr="repository.find(id)")
      *
      * @param User $user

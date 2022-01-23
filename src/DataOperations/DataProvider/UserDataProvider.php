@@ -28,4 +28,22 @@ class UserDataProvider
         }
         return $listUsersArray;
     }
+
+    public function showUserById(int $id): array
+    {
+        $user = $this->userRepository->findOneBy(['id' => $id]);
+        if($user == null){return ['id'=>'No']; exit; };
+        /** @var User $user */
+        $listUsersArray = [];
+        $listUsersArray[] = [
+            'id' => $user->getId(),
+            'name' => $user->getFirstName(),
+            'email' =>$user->getEmail()
+        ];
+
+        return $listUsersArray;
+
+    }
+
+
 }
