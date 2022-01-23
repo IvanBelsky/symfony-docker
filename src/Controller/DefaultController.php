@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\DataOperations\DataManager\UserDataManager;
 use App\DataOperations\DataProvider\UserDataProvider;
 use App\Entity\User;
+use App\Entity\UserIpLog;
 use App\Repository\UserRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
@@ -37,7 +38,7 @@ class DefaultController extends AbstractController
      * @Security(name="Bearer")
      *
      */
-    public function admin_2_post_gen_user(ManagerRegistry $doctrine): Response
+    public function genUser(ManagerRegistry $doctrine, bool $ipLog=false): Response
     {
         $entityManager = $doctrine->getManager();
         $user = new User();
@@ -54,8 +55,26 @@ class DefaultController extends AbstractController
 
         // actually executes the queries (i.e. the INSERT query)
         $entityManager->flush();
+        if($ipLog) {
+            return new Response('Create a new record with id '
+                .$user->getId().'  '.$user->getFirstName().'  and ip = '.$this->genIpLog($doctrine,$user->getId()));
+        }
+        else {
+               return new Response('Create a new record with id '
+                   .$user->getId().'  '.$user->getFirstName());
+            }
+    }
 
-        return new Response('Saved new product with id '.$user->getId().'  '.$user->getFirstName());
+    public function genIpLog(ManagerRegistry $doctrine, int $userId):string
+    {
+        $entityManager = $doctrine->getManager();
+        $userIpLog = new UserIpLog();
+        $userIpLog->setDateCreated(new \DateTime());
+        $userIpLog->setIpAdr('192.168.58.'.rand(1,254));
+        $userIpLog->setUserId(17);
+        $entityManager->persist($userIpLog);
+        $entityManager->flush();
+        return $userIpLog->getIpAdr().'   id='.$userIpLog->getUserId();
     }
 
     /**
@@ -144,9 +163,10 @@ class DefaultController extends AbstractController
      * @Security(name="Bearer")
      *
      */
-    public function admin_2_get(UserDataProvider $userDataProvider): JsonResponse
+    public function genUserWithIpLog(ManagerRegistry $doctrine): Response
     {
-        return new JsonResponse($userDataProvider->getAllUsers());
+        return new Response($this->genUser($doctrine, true));
+
     }
 
     /**
@@ -170,32 +190,24 @@ class DefaultController extends AbstractController
        // return $this->render('content1.html.twig',['items'=>'fdklgdfjg']);
     }
 
-    public function showUsers(ManagerRegistry $doctrine)
+    public function showUsers(UserRepository $userRepository)
+      //  public function showUsers(ManagerRegistry $doctrine)
     {
-        $userRepository = $doctrine->getRepository(User::class);
-        $listUsers = $userRepository->findAll();
-         $i = 0;
-        //   $listUsersArray = $serializer->deserialize($listUsers);
+      //  $userRepository = $doctrine->getRepository(User::class);
+        $listUsers = $userRepository->getListUsers();
         /** @var User $user */
         $listUsersArray = [];
         foreach ($listUsers as $user) {
            // $i = $i+1;
             $listUsersArray[] = [
-                'id' => $user->getId(),
-                'name' => $user->getFirstName(),
-                'urlForDel' => '/api/user/deletebyid/'
+                'id' => $user['id'],
+                'name' => $user['firstName'],
+                'ipAdr' => $user['ipAdr']
             ];
 
         }
 
-        $items = [
-            ['name' => 'wer', 'id' => 1],
-            ['name' => 'hghj', 'id' => 17],
-            ['name' => 'spencer', 'id' => 120],
-            ['name' => 'vcbcvb', 'id' => 110],
-        ];
         return $this->render('content1.html.twig',['items'=>$listUsersArray]);
-
     }
 
 
@@ -223,7 +235,7 @@ class DefaultController extends AbstractController
 
     public function index()
     {
-        return $this->render('base.html.twig',['items'=>'func index']);
+        return $this->render('base.html.twig');
     }
 
     public function addUser()

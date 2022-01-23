@@ -3,8 +3,6 @@
 namespace App\Entity;
 
 use App\Repository\UserIpLogRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -20,7 +18,7 @@ class UserIpLog
     private $id;
 
     /**
-     * @ORM\ManyToMany(targetEntity=User::class)
+     * @ORM\ManyToOne(targetEntity=User::class)
      */
     private $user;
 
@@ -34,9 +32,13 @@ class UserIpLog
      */
     private $dateCreated;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $userId;
+
     public function __construct()
     {
-        $this->user = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -45,26 +47,28 @@ class UserIpLog
     }
 
     /**
-     * @return Collection|User[]
+     * @return User
      */
-    public function getUser(): Collection
+    public function getUser(): User
     {
         return $this->user;
     }
 
-    public function addUser(User $user): self
+    public function setUser(User $user): self
     {
-        if (!$this->user->contains($user)) {
-            $this->user[] = $user;
-        }
+        $this->user = $user;
 
         return $this;
     }
 
-    public function removeUser(User $user): self
+    public function getUserId(): int
     {
-        $this->user->removeElement($user);
+        return $this->userId;
+    }
 
+    public function setUserId(int $userId): self
+    {
+        $this->userId = $userId;
         return $this;
     }
 

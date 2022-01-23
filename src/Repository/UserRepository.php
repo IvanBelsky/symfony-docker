@@ -3,7 +3,9 @@
 namespace App\Repository;
 
 use App\Entity\User;
+use App\Entity\UserIpLog;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -66,4 +68,24 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         ;
     }
     */
+
+    public function getListUsers(): array
+    {
+        $qb =$this->createQueryBuilder('u')
+            ->select([
+                'u.id',
+                'u.firstName',
+                'ui.ipAdr'
+            ])
+            ->leftJoin(
+                UserIpLog::class,
+                'ui',
+                Join::WITH,
+                'ui.user = u.id'
+            )
+            ->getQuery()
+            ->getResult();
+
+        return $qb;
+    }
 }

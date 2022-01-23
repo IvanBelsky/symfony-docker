@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+{% import "macro/core.twig" as core %}
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
@@ -14,22 +15,11 @@
         {% endblock %}
     </head>
     <body>
-        {% block body %} <button onclick="document.location='/showUsers'">Просмотр всех пользователей</button>
+    <button onclick="document.location='{{ path('show_users') }}'">Просмотр всех пользователей</button>
+    <button onclick="document.location='{{ core.link(path('show_users'), 'show', 'danger', true) }}'">Просмотр всех пользователей 2</button>
+    {{ core.link(path('show_users'), 'show', 'danger', true) }}
+        {% block body %}
         {% endblock %}
         Hello? World!
-
-
-
-
-{% for item in items %}
-          Name: {{item.name | upper}} Id: {{item.id}} <br>
-        {% endfor %}
-
-        {% block content %}
-          <h1>Block content text </h1>
-        {% endblock %}
-
-
-
     </body>
 </html>

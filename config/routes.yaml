@@ -7,28 +7,28 @@ any_name:
     methods: GET
     controller: App\Controller\DefaultController::admin_1
 
-any_name_2:
-    path: /api/admin2
-    methods: GET
-    controller: App\Controller\DefaultController::admin_2_get
-
-any_name_3:
-    path: /api/admin2
+gen_user_with_iplog:
+    path: /api/genUserWithIpLog
     methods: POST
-    controller: App\Controller\DefaultController::admin_2_post_gen_user
+    controller: App\Controller\DefaultController::genUserWithIpLog
+
+gen_user:
+    path: /api/genUser
+    methods: POST
+    controller: App\Controller\DefaultController::genUser
 
 any_my_name_4:
     path: /api/user/show/{id}
     methods: GET
     controller: App\Controller\DefaultController::showById
 
-any_my_name_5:
+delete_user_by_id:
     path: /api/user/{id}
-    methods: DELETE
+    methods: [DELETE, POST]
     controller: App\Controller\DefaultController::deleteById
 
 any_my_name_6:
-    path: /index
+    path: /api/index
     methods: GET
     controller: App\Controller\DefaultController::index
 
@@ -38,7 +38,7 @@ any_my_name_7:
     controller: App\Controller\DefaultController::addUser
 
 show_users:
-    path: /showUsers
+    path: /api/showUsers
     methods: GET
     controller: App\Controller\DefaultController::showUsers
 

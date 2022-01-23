@@ -1,0 +1,12 @@
+{% macro link(url, title='button', color='primary', confirm=false) %}
+  {% set id = random(1, 1500000) %}
+  <a href="{{ url }}"
+     class="btn btn-xs btn-{{ color }}"
+    {% if confirm %}
+      data-confirm="#modal{{ id }}"
+      data-toggle="modal" data-target="#modal{{ id }}"
+    {% endif %}
+  >
+    {{ title }}
+  </a>
+{% endmacro %}
