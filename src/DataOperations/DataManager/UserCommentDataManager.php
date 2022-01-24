@@ -16,6 +16,7 @@ class UserCommentDataManager
         $this->entityManager = $entityManager;
     }
 
+    /*
     public function addComment(User $user):Comment
     {
         $content = $this->arrayForGenComment[rand(0,3)];
@@ -28,6 +29,6 @@ class UserCommentDataManager
         return $userComment;
 
     }
-
+*/
 
 }

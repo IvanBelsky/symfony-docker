@@ -70,17 +70,20 @@ class DefaultController extends AbstractController
       return new JsonResponse($resp);
     }
 
-
-    public function genComment(UserCommentDataManager $userCommentDataManager, Request $request): JsonResponse
+    /**
+     * @Entity("$user", expr="repository.find(id)")
+     *
+     * @param User $user
+     *
+     * @return Response
+     */
+    public function genComment(UserDataProvider $userDataProvider, UserDataManager $userDataManager, Request $request): Response
     {
-        //  $id = $user->getId();
         $parameters = $request->query->all();
         $id = (int)$parameters['id'];
-        $user = $userCommentDataManager->
-
-        $resp = $userCommentDataManager->addComment($user);
-
-        return new JsonResponse($resp);
+        $arrayForGenComment=['фото на море','фото в офисе с коллегами','фото на природе с друзьями','фото моего кота'];
+        $comment = $userDataManager->addUserComment($id,'Это коммент к '.$arrayForGenComment[rand(0,3)].'  id='. $id);
+        return new Response($comment->getContent());
     }
 
         /**

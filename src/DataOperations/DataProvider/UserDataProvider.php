@@ -4,6 +4,7 @@
 namespace App\DataOperations\DataProvider;
 
 
+use App\Entity\User;
 use App\Repository\UserRepository;
 
 class UserDataProvider
@@ -45,5 +46,12 @@ class UserDataProvider
 
     }
 
+    public function getUserById(int $id): User
+    {
+        $user = $this->userRepository->findOneBy(['id' => $id]);
+      //  if($user == null){return ['id'=>'No']; exit; };
+        return $user;
+
+    }
 
 }

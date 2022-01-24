@@ -3,9 +3,11 @@
 namespace App\DataOperations\DataManager;
 
 
+use App\DataOperations\DataProvider\UserDataProvider;
 use App\Entity\Comment;
 use App\Entity\User;
 use App\Entity\UserIpLog;
+use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 
 class UserDataManager
@@ -13,13 +15,15 @@ class UserDataManager
     private $entityManager;
     private $userIpLogDataManager;
     private $userCommentDataManager;
+    private $userDataProvider;
 
-    public function __construct(EntityManagerInterface $entityManager,
+    public function __construct(EntityManagerInterface $entityManager, UserDataProvider $userDataProvider,
                        UserIpLogDataManager $userIpLogDataManager, UserCommentDataManager $userCommentDataManager)
     {
         $this->entityManager = $entityManager;
         $this->userIpLogDataManager = $userIpLogDataManager;
         $this->userCommentDataManager = $userCommentDataManager;
+        $this->userDataProvider = $userDataProvider;
     }
 
     /**
@@ -30,6 +34,7 @@ class UserDataManager
         $this->entityManager->remove($user);
         $this->entityManager->flush();
     }
+
 
     public function addUser(bool $ipLog=false): User
     {
@@ -51,8 +56,16 @@ class UserDataManager
 
     }
 
-    public function addUserComment(User $user, string $comment):Comment
+    public function addUserComment(int $id, string $content):Comment
     {
-
+        $user = $this->userDataProvider->getUserById($id);
+        $comment = new Comment();
+        $comment->setContent($content);
+        $comment->setUser($user);
+        $comment->setDateCreated(new \DateTime());
+       $user->addComment($comment);
+       $this->entityManager->persist($comment);
+        $this->entityManager->flush();
+       return $comment;
     }
 }
