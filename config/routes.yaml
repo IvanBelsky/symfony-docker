@@ -13,14 +13,19 @@ gen_user:
     controller: App\Controller\DefaultController::genUser
 
 show_user_by_id:
-    path: /api/user/show/{id}
+    path: /api/user/{id}/show
     methods: POST
     controller: App\Controller\DefaultController::showById
 
 gen_comment_by_id:
-    path: /api/genCommentById
+    path: /api/user/{id}/gen-comment
     methods: POST
     controller: App\Controller\DefaultController::genComment
+
+add_comment_by_id:
+    path: /api/user/{id}/add-comment
+    methods: POST
+    controller: App\Controller\UserController::addComment
 
 delete_user_by_id:
     path: /api/user/{id}

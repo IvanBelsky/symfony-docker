@@ -56,16 +56,17 @@ class UserDataManager
 
     }
 
-    public function addUserComment(int $id, string $content):Comment
+    public function addUserComment(User $user, string $content):Comment
     {
-        $user = $this->userDataProvider->getUserById($id);
+       // $user = $this->userDataProvider->getUserById($id);
         $comment = new Comment();
         $comment->setContent($content);
         $comment->setUser($user);
         $comment->setDateCreated(new \DateTime());
-       $user->addComment($comment);
-       $this->entityManager->persist($comment);
+        $user->addComment($comment);
+        $this->entityManager->persist($comment);
         $this->entityManager->flush();
-       return $comment;
+
+        return $comment;
     }
 }

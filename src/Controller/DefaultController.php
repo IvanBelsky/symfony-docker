@@ -2,13 +2,10 @@
 
 namespace App\Controller;
 
-use App\DataOperations\DataManager\UserCommentDataManager;
 use App\DataOperations\DataManager\UserDataManager;
 use App\DataOperations\DataProvider\UserDataProvider;
 use App\Entity\User;
-use App\Entity\UserIpLog;
 use App\Repository\UserRepository;
-use Doctrine\Persistence\ManagerRegistry;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -16,10 +13,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-use Nelmio\ApiDocBundle\Annotation\Model;
 use Nelmio\ApiDocBundle\Annotation\Security;
 use OpenApi\Annotations as OA;
-use Symfony\Component\Serializer\SerializerInterface;
 
 
 class DefaultController extends AbstractController
@@ -77,12 +72,13 @@ class DefaultController extends AbstractController
      *
      * @return Response
      */
-    public function genComment(UserDataProvider $userDataProvider, UserDataManager $userDataManager, Request $request): Response
+    public function genComment(User $user, UserDataManager $userDataManager, Request $request): Response
+//    public function genComment(UserDataProvider $userDataProvider, UserDataManager $userDataManager, Request $request): Response
     {
-        $parameters = $request->query->all();
-        $id = (int)$parameters['id'];
+        //$parameters = $request->query->all();
+        //$id = (int)$parameters['id'];
         $arrayForGenComment=['фото на море','фото в офисе с коллегами','фото на природе с друзьями','фото моего кота'];
-        $comment = $userDataManager->addUserComment($id,'Это коммент к '.$arrayForGenComment[rand(0,3)].'  id='. $id);
+        $comment = $userDataManager->addUserComment($user,'Это коммент к '.$arrayForGenComment[rand(0,3)].'  id='.$user->getId());
         return new Response($comment->getContent());
     }
 
