@@ -1,11 +1,5 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: andrey
- * Date: 24.01.22
- * Time: 21:25
- */
-
+//Form for validation Comments
 namespace App\Form;
 
 
@@ -24,11 +18,13 @@ class CommentType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('dateCreated', DateType::class, [
+         //   ->add('dateCreated', DateType::class, [
+            ->add('calendar', DateType::class, [
                 'format' => 'yyyy-MM-dd',
                 'widget' => 'single_text',
             ])
-            ->add('content', TextType::class, [
+         //   ->add('content', TextType::class, [
+            ->add('comment', TextType::class, [
                 'constraints' => [
                     new NotBlank(),
                     new Length(['min' => 3]),

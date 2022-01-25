@@ -1,0 +1,15 @@
+{% import "macro/core.twig" as core %}
+{% block body %}
+
+  <p>Добавление комментария пользователя id= {{item}}<Br>
+          <form action="{{ path('add_comment_by_id', { 'id': item}) }}"
+                  method="POST">
+            <textarea name="comment" cols="100" rows="20"></textarea> </p>
+           <p>Выберите дату: <input type="date" name="calendar"> </p>
+            <button>add comment</button>
+          </form>
+
+
+
+{% endblock %}
+

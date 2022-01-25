@@ -11,10 +11,20 @@
     <td>Id: {{item.id}} -</td>
     <td><form action="{{ path('show_user_by_id', { 'id': item.id}) }}"
               method="POST">
-        <button>show user</button>
+        <button>show user old</button>
+      </form>
+    </td>
+    <td><form action="{{ path('show_user_info_by_id', { 'id': item.id}) }}"
+              method="POST">
+        <button>show user new</button>
       </form>
     </td>
     <td><form action="{{ path('gen_comment_by_id', { 'id': item.id}) }}"
+              method="POST">
+        <button>gen comment</button>
+      </form>
+    </td>
+    <td><form action="{{ path('show_form_add_comment_by_id', { 'id': item.id}) }}"
               method="POST">
         <button>add comment</button>
       </form>

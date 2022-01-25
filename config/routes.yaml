@@ -17,6 +17,11 @@ show_user_by_id:
     methods: POST
     controller: App\Controller\DefaultController::showById
 
+show_user_info_by_id:
+    path: /api/user/{id}/show-info
+    methods: POST
+    controller: App\Controller\UserController::showUserInfoById
+
 gen_comment_by_id:
     path: /api/user/{id}/gen-comment
     methods: POST
@@ -26,6 +31,11 @@ add_comment_by_id:
     path: /api/user/{id}/add-comment
     methods: POST
     controller: App\Controller\UserController::addComment
+
+show_form_add_comment_by_id:
+    path: /api/user/{id}/form-add-comment
+    methods: POST
+    controller: App\Controller\UserController::showFormAddComment
 
 delete_user_by_id:
     path: /api/user/{id}

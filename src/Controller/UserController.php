@@ -41,17 +41,18 @@ class UserController extends AbstractController
      */
     public function addComment(User $user, UserDataManager $userDataManager, Request $request): Response
     {
-        //$data = json_decode($request->getContent(), true);
-        $data = json_decode($request->getContent(), true);
+        $output = [];
+        parse_str($request->getContent(), $output);
+       // $data = json_decode($request->getContent(), true);
         $form = $this->createForm(CommentType::class);
-        $form->submit($data);
+        $form->submit($output);
         if (!$form->isValid()) {
             return new JsonResponse($this->getErrorMessages($form));
         }
-        return new JsonResponse($data);
+        $comment = $userDataManager->addUserComment($user,$output['comment']);
+        return new Response('Все ок. Коммент='.$output['comment'].'  Дата = '.$output['calendar']);
+
         //$arrayForGenComment=['фото на море','фото в офисе с коллегами','фото на природе с друзьями','фото моего кота'];
-        //$comment = $userDataManager->addUserComment($user,'Это коммент к '.$arrayForGenComment[rand(0,3)].'  id='.$user->getId());
-        //return new Response($comment->getContent());
     }
 
     protected function getErrorMessages(FormInterface $form) {
@@ -65,4 +66,27 @@ class UserController extends AbstractController
         }
         return $errors;
     }
+
+    /**
+    * @Entity("$user", expr="repository.find(id)")
+    * @param User $user
+    * @return Response
+    */
+    public function showFormAddComment(User $user)
+    {
+        return $this->render('usercommentadd.html.twig',['item'=>$user->getId()]);
+    }
+
+    /**
+     * @Entity("$user", expr="repository.find(id)")
+     * @param User $user
+     * @return Response
+     */
+    public function showUserInfoById(User $user, UserDataManager $userDataManager): Response
+    {
+
+        return $this->render('userinfo.html.twig',['item'=>$user->getId()]);
+    }
+
+
 }

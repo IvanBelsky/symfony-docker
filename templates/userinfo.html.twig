@@ -1,52 +1,5 @@
-{% extends 'base.html.twig' %}
 {% import "macro/core.twig" as core %}
 {% block body %}
 
-  Информация по пользователю {{item.name | upper}}  id={{item.id}}
-  <table>
-    {% for item in items %}
-      <tr>
-        <td>Name: {{item.name | upper}}</td>
-        <td>IP: {{item.ipAdr}}</td>
-        <td>Id: {{item.id}} -</td>
-        <td><form action="{{ path('show_user_by_id', { 'id': item.id}) }}"
-                  method="POST">
-            <button>show user</button>
-          </form>
-        </td>
-        <td><form action="{{ path('delete_user_by_id', { 'id': item.id}) }}"
-                  method="POST">
-            <button>delete</button>
-          </form>
-        </td>
-      </tr>
-    {% endfor %}
-  </table>
-
-
-  <form action="{{ path('gen_user', { 'isLog': 0}) }}" method="POST">
-
-    <p style="text-align: center"><button > Добавление пользователя</button> </p>
-  </form>
-
-  <form action="{{ path('gen_user', { 'isLog': 1}) }}" method="POST">
-
-    <p style="text-align: center"><button > Добавление пользователя c логами IP</button> </p>
-  </form>
-
-
-  <button onclick="document.location='/add2'">Переход2 по ссылке</button>
+  Информация по пользователю {{item}}
 {% endblock %}
-
-        {% block content %}
-          <h1>Inherited text content1</h1>
-          ************ Этот блок выполняться не будет!!!!!!!!!!!!!!!!!
-          здесь использовано наследование в Twig
-          после этой строки идет вызов
-          <form action="/api/admin2" method="POST">
-
-            <p style="text-align: center"><button > Добавление/удаление пользователей</button> </p>
-          </form>
-
-        {% endblock %}
-
