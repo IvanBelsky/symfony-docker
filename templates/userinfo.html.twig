@@ -1,5 +1,17 @@
 {% import "macro/core.twig" as core %}
 {% block body %}
 
-  Информация по пользователю {{item}}
+  Информация по пользователю id: {{ id }} <br/> <br/>
+<table>
+  <caption>Комментарии пользователя</caption>
+  <tr><th>comm id</th><th>comment</th><th>date time</th></tr>
+  {% for item in items %}
+  <tr>
+    <td>Id: {{item.id}} </td>
+    <td width="400"> Comment: {{item.content}} </td>
+    <td>Data: {{item.dateCreated |date('Y-m-d')}} </td>
+  {% endfor %}
+    </table>
+
 {% endblock %}
+

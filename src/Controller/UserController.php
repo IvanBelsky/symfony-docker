@@ -74,7 +74,7 @@ class UserController extends AbstractController
     */
     public function showFormAddComment(User $user)
     {
-        return $this->render('usercommentadd.html.twig',['item'=>$user->getId()]);
+                return $this->render('usercommentadd.html.twig',['item'=>$user->getId()]);
     }
 
     /**
@@ -82,10 +82,11 @@ class UserController extends AbstractController
      * @param User $user
      * @return Response
      */
-    public function showUserInfoById(User $user, UserDataManager $userDataManager): Response
+    public function showUserInfoById(User $user, UserDataManager $userDataManager) //: Response
     {
-
-        return $this->render('userinfo.html.twig',['item'=>$user->getId()]);
+        $comments = [];
+      //  $comments =  $user->getComments()->toArray();
+        return $this->render('userinfo.html.twig',['items'=>$user->getComments()->toArray(),'id'=>$user->getId()]);
     }
 
 
