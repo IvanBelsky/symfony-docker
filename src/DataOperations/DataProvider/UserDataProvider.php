@@ -5,7 +5,11 @@ namespace App\DataOperations\DataProvider;
 
 
 use App\Entity\User;
+use App\Repository\UserIpLogRepository;
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\Collection;
+use Symfony\Bridge\Doctrine\ManagerRegistry;
+
 
 class UserDataProvider
 {
@@ -53,5 +57,15 @@ class UserDataProvider
         return $user;
 
     }
+
+
+    public function getUserIpLog(int $id, UserIpLogRepository $ipLogRepository):array
+    {
+      // return $ipLogRepository->findIpLogById($id);
+        return $ipLogRepository->findAllIp($id);
+
+    }
+
+
 
 }

@@ -1,17 +1,37 @@
 {% import "macro/core.twig" as core %}
 {% block body %}
 
-  Информация по пользователю id: {{ id }} <br/> <br/>
+  Информация по пользователю
+  {% for item in info %}
+     id: {{ item.id }},  FirstName: {{ item.name }},  email: {{ item.email }}
+  {% endfor %}
+  <br/> <br/>
+  ---------------------------------------------
 <table>
   <caption>Комментарии пользователя</caption>
   <tr><th>comm id</th><th>comment</th><th>date time</th></tr>
   {% for item in items %}
   <tr>
     <td>Id: {{item.id}} </td>
-    <td width="400"> Comment: {{item.content}} </td>
-    <td>Data: {{item.dateCreated |date('Y-m-d')}} </td>
+    <td width="400"> {{item.content}} </td>
+    <td>{{item.dateCreated |date('Y-m-d')}} </td>
   {% endfor %}
     </table>
+  ----------------------------------------------
+  <br/> <br/>
+<table>
+  <caption>Подключения пользователя</caption>
+  <tr><th>log id</th><th>ip adress</th><th>date time</th></tr>
+
+  {% for item in iplog %}
+  <tr>
+    <td>Id: {{item.id}} </td>
+    <td width="400"> {{item.ip_adr}} </td>
+    <td>{{item.date_created |date('Y-m-d')}} </td>
+  {% endfor %}
+</table>
+  ----------------------------------------------
+
 
 {% endblock %}
 

@@ -22,11 +22,11 @@ class UserIpLogRepository extends ServiceEntityRepository
     // /**
     //  * @return UserIpLog[] Returns an array of UserIpLog objects
     //  */
-    /*
-    public function findByExampleField($value)
+
+    public function findIpLogById(int $value)
     {
         return $this->createQueryBuilder('u')
-            ->andWhere('u.exampleField = :val')
+            ->andWhere('u.user = :val')
             ->setParameter('val', $value)
             ->orderBy('u.id', 'ASC')
             ->setMaxResults(10)
@@ -34,7 +34,20 @@ class UserIpLogRepository extends ServiceEntityRepository
             ->getResult()
         ;
     }
-    */
+
+    public function findAllIp(int $id): array
+    {
+        $conn = $this->getEntityManager()->getConnection();
+
+        $sql = "SELECT * FROM user_ip_log i WHERE i.user_id = :user_id";
+        $stmt = $conn->prepare($sql);
+        $resultSet = $stmt->executeQuery(['user_id' => $id]);
+
+        // returns an array of arrays (i.e. a raw data set)
+        return $resultSet->fetchAllAssociative();
+    }
+
+
 
     /*
     public function findOneBySomeField($value): ?UserIpLog
