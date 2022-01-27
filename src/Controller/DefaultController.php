@@ -120,25 +120,34 @@ class DefaultController extends AbstractController
        // return $this->render('content1.html.twig',['items'=>'fdklgdfjg']);
     }
 
-    public function showUsers(UserRepository $userRepository)
-      //  public function showUsers(ManagerRegistry $doctrine)
-    {
-      //  $userRepository = $doctrine->getRepository(User::class);
-        $listUsers = $userRepository->getListUsers();
-        /** @var User $user */
-        $listUsersArray = [];
-        foreach ($listUsers as $user) {
-           // $i = $i+1;
-            $listUsersArray[] = [
-                'id' => $user['id'],
-                'name' => $user['firstName'],
-                'ipAdr' => $user['ipAdr']
-            ];
-
+    /*   public function showUsers(UserRepository $userRepository)
+       {
+           $listUsers = $userRepository->getListUsers();
+           $listUsersArray = [];
+           foreach ($listUsers as $user) {
+               $listUsersArray[] = [
+                   'id' => $user['id'],
+                   'name' => $user['firstName'],
+                  'ipAdr' => $user['ipAdr']
+               ];
+           }
+           return $this->render('content1.html.twig',['items'=>$listUsersArray]);
+       }
+   */
+       public function showUsers(UserRepository $userRepository)
+        {
+            $listUsers = $userRepository->getListUsers();
+            $listUsersArray = [];
+            foreach ($listUsers as $user) {
+                $listUsersArray[] = [
+                    'id' => $user['id'],
+                    'name' => $user['firstName']
+                ];
+            }
+            return $this->render('content1.html.twig',['items'=>$listUsersArray]);
         }
 
-        return $this->render('content1.html.twig',['items'=>$listUsersArray]);
-    }
+
 
 
     /**

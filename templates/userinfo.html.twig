@@ -26,8 +26,8 @@
   {% for item in iplog %}
   <tr>
     <td>Id: {{item.id}} </td>
-    <td width="400"> {{item.ip_adr}} </td>
-    <td>{{item.date_created |date('Y-m-d')}} </td>
+    <td width="400"> {{item.ipadr}} </td>
+    <td>{{item.datecreated |date('Y-m-d')}} </td>
   {% endfor %}
 </table>
   ----------------------------------------------

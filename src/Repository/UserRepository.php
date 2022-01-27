@@ -79,6 +79,20 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
             ->select([
                 'u.id',
                 'u.firstName',
+            ])
+            ->getQuery()
+            ->getResult();
+
+        return $qb;
+    }
+
+    /*
+    public function getListUsers(): array
+    {
+        $qb =$this->createQueryBuilder('u')
+            ->select([
+                'u.id',
+                'u.firstName',
                 'ui.ipAdr'
             ])
             ->leftJoin(
@@ -92,5 +106,5 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
 
         return $qb;
     }
-
+*/
 }

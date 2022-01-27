@@ -16,8 +16,8 @@
     </head>
     <body>
     <button onclick="document.location='{{ path('show_users') }}'">Просмотр всех пользователей</button>
-    <button onclick="document.location='{{ core.link(path('show_users'), 'show', 'danger', true) }}'">Просмотр всех пользователей 2</button>
-    {{ core.link(path('show_users'), 'show', 'danger', true) }}
+
+
         {% block body %}
         {% endblock %}
         Hello? World!

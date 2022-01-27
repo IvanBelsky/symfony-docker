@@ -8,6 +8,7 @@ use App\Entity\User;
 use App\Repository\UserIpLogRepository;
 use App\Repository\UserRepository;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 use Symfony\Bridge\Doctrine\ManagerRegistry;
 
 
@@ -59,10 +60,11 @@ class UserDataProvider
     }
 
 
-    public function getUserIpLog(int $id, UserIpLogRepository $ipLogRepository):array
+    public function getUserIpLog(int $id, UserIpLogRepository $ipLogRepository):Paginator
+//    public function getUserIpLog(int $id, UserIpLogRepository $ipLogRepository):array
     {
       // return $ipLogRepository->findIpLogById($id);
-        return $ipLogRepository->findAllIp($id);
+        return $ipLogRepository->findAllIp($id,2, 4);
 
     }
 

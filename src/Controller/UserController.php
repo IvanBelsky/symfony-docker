@@ -86,10 +86,11 @@ class UserController extends AbstractController
     public function showUserInfoById(User $user, UserDataProvider $userDataProvider,
               UserIpLogRepository $ipLogRepository) //:JsonResponse
     {
-        $iplog = $userDataProvider->getUserIpLog($user->getId(), $ipLogRepository);
+       $iplog = $userDataProvider->getUserIpLog($user->getId(), $ipLogRepository);
         $info = $userDataProvider->showUserById($user->getId());
         return $this->render('userinfo.html.twig',['items'=>$user->getComments()->toArray(),
                'info'=>$info, 'iplog'=>$iplog]);
+
         /*    var_dump($iplog);
             array(1) { [0]=> array(4) { ["id"]=> string(1) "6"
             ["ip_adr"]=> string(14) "192.168.58.202"

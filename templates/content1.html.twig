@@ -7,7 +7,7 @@
   {% for item in items %}
   <tr>
     <td>Name: {{item.name | upper}}</td>
-    <td>IP: {{item.ipAdr}}</td>
+    <td>IP: {{'        '}}</td>
     <td>Id: {{item.id}} -</td>
     <td><form action="{{ path('show_user_by_id', { 'id': item.id}) }}"
               method="POST">
