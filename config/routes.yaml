@@ -18,8 +18,8 @@ show_user_by_id:
     controller: App\Controller\DefaultController::showById
 
 show_user_info_by_id:
-    path: /api/user/{id}/show-info
-    methods: POST
+    path: /api/user/{id}/show-info/{page}
+    methods: [GET,POST]
     controller: App\Controller\UserController::showUserInfoById
 
 gen_comment_by_id:

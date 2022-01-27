@@ -144,7 +144,7 @@ class DefaultController extends AbstractController
                     'name' => $user['firstName']
                 ];
             }
-            return $this->render('content1.html.twig',['items'=>$listUsersArray]);
+            return $this->render('content1.html.twig',['items'=>$listUsersArray, 'page'=>0]);
         }
 
 

@@ -83,13 +83,22 @@ class UserController extends AbstractController
      * @param User $user
      * @return Response
      */
-    public function showUserInfoById(User $user, UserDataProvider $userDataProvider,
-              UserIpLogRepository $ipLogRepository) //:JsonResponse
+    public function showUserInfoById(Request $request, User $user, UserDataProvider $userDataProvider,
+              UserIpLogRepository $ipLogRepository): Response
     {
-       $iplog = $userDataProvider->getUserIpLog($user->getId(), $ipLogRepository);
+        $arr = explode('/',$request->getRequestUri());
+        $offset = intval( end($arr));
+      //  return new Response(var_dump($offset));
+       // $offset = max(0, $request->query->getInt('offset', 0));
+       // $offset = 2;
+        $iplog = $ipLogRepository->findAllIp($user->getId(),$offset);
+        //$iplog = $userDataProvider->getUserIpLog($user->getId(), $ipLogRepository);
         $info = $userDataProvider->showUserById($user->getId());
         return $this->render('userinfo.html.twig',['items'=>$user->getComments()->toArray(),
-               'info'=>$info, 'iplog'=>$iplog]);
+               'info'=>$info, 'iplog'=>$iplog,
+            'previous' => $offset - UserIpLogRepository::PAGINATOR_PER_PAGE,
+            'next' => min(count($iplog), $offset + UserIpLogRepository::PAGINATOR_PER_PAGE)
+            ]);
 
         /*    var_dump($iplog);
             array(1) { [0]=> array(4) { ["id"]=> string(1) "6"

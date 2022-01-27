@@ -14,7 +14,7 @@
         <button>show user old</button>
       </form>
     </td>
-    <td><form action="{{ path('show_user_info_by_id', { 'id': item.id}) }}"
+    <td><form action="{{ path('show_user_info_by_id', { 'id': item.id, 'page':page}) }}"
               method="POST">
         <button>show user new</button>
       </form>

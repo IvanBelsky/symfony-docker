@@ -16,7 +16,7 @@ use Doctrine\ORM\Tools\Pagination\Paginator;
  */
 class UserIpLogRepository extends ServiceEntityRepository
 {
-    public const PAGINATOR_PER_PAGE = 2;
+    public const PAGINATOR_PER_PAGE = 1;
 
     public function __construct(ManagerRegistry $registry)
     {
@@ -39,13 +39,13 @@ class UserIpLogRepository extends ServiceEntityRepository
         ;
     }
 
-    public function findAllIp(int $id, int $offset, int $limit_size): Paginator
+    public function findAllIp(int $id, int $offset): Paginator
 //    public function findAllIp(int $id, int $limit_size): array
     {
         $conn = $this->getEntityManager()->getConnection();
 
         $sql = "SELECT * FROM user_ip_log i  where i.user_id = ".$id
-               ." LIMIT ".$offset.", ".$limit_size;
+               ." LIMIT ".$offset.", 5";
         $stmt = $conn->prepare($sql);
         $resultSet = $stmt->executeQuery([]);
         var_dump($sql);
@@ -56,8 +56,7 @@ class UserIpLogRepository extends ServiceEntityRepository
         ->setParameter('id', $id)
         ->setMaxResults(self::PAGINATOR_PER_PAGE)
         ->setFirstResult($offset)
-        ->getQuery()
-            ;
+        ->getQuery();
         var_dump($query->getSQL());
 //        $resultSet = $stmt->executeQuery(['user_id' => $id, 'page_size'=>$page_size]);
 

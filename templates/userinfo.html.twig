@@ -1,10 +1,11 @@
 {% import "macro/core.twig" as core %}
 {% block body %}
-
+  {% set id = 1 %}
   Информация по пользователю
   {% for item in info %}
      id: {{ item.id }},  FirstName: {{ item.name }},  email: {{ item.email }}
-  {% endfor %}
+  {% set id = item.id %}
+  {% endfor %}  <br/> <br/>
   <br/> <br/>
   ---------------------------------------------
 <table>
@@ -31,7 +32,27 @@
   {% endfor %}
 </table>
   ----------------------------------------------
+  previous = {{ previous }}  next= {{ next }}
+  ---------------------------------------------
 
+  {% if iplog|length > 0 %}
+  <div>Найдено записей: {{ iplog|length }}</div>
+
+  <br/> <br/>
+  {% if previous >= 0 %}
+    <a href="{{ path('show_user_info_by_id', { 'id':  id, 'page':previous}) }}">Previous</a>
+  {% else %}Previous
+  {% endif %}
+
+  {% if next < iplog|length %}
+      <a href="{{ path('show_user_info_by_id', { 'id': id, 'page':next}) }}">Next</a>
+  {% else %}Next
+  {% endif %}
+
+  {% else %}
+    <div>Нет записей о подключениях пользователя.</div>
+  {% endif %}
+ <a href="{{ path('show_users') }}">   Вернуться к пользователям</a>
 
 {% endblock %}
 
