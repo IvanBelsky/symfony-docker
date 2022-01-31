@@ -351,3 +351,57 @@ Admin request --- ControllerArgumentsEvent 2022-01-31
 Admin request --- Controller 2022-01-31
 Admin request --- ControllerArgumentsEvent 2022-01-31
 2022-01-31 New response
+2022-01-31:/api/user/5/show-info/0
+Admin request --- Controller 2022-01-31
+Admin request --- ControllerArgumentsEvent 2022-01-31
+2022-01-31 New response
+2022-01-31:/api/showUsers
+Admin request --- Controller 2022-01-31
+Admin request --- ControllerArgumentsEvent 2022-01-31
+2022-01-31 New response
+2022-01-31:/_wdt/6428b6
+Admin request --- Controller 2022-01-31
+Admin request --- ControllerArgumentsEvent 2022-01-31
+2022-01-31 New response
+2022-01-31:/api/genUserWithIpLog?isLog=1
+Admin request --- Controller 2022-01-31
+Admin request --- ControllerArgumentsEvent 2022-01-31
+2022-01-31:/api/genUserWithIpLog?isLog=1
+Admin request --- Controller 2022-01-31
+Admin request --- ControllerArgumentsEvent 2022-01-31
+2022-01-31 New response
+2022-01-31 New response
+2022-01-31:/_wdt/b5545c
+Admin request --- Controller 2022-01-31
+Admin request --- ControllerArgumentsEvent 2022-01-31
+2022-01-31 New response
+2022-01-31:/api/genUserWithIpLog?isLog=1
+Admin request --- Controller 2022-01-31
+Admin request --- ControllerArgumentsEvent 2022-01-31
+checkEmailLog Ivan_123   Hello new user!   2022-01-31
+2022-01-31:35 : Hello new user!
+2022-01-31 New response
+2022-01-31:/api/genUserWithIpLog?isLog=0
+Admin request --- Controller 2022-01-31
+Admin request --- ControllerArgumentsEvent 2022-01-31
+checkEmailLog Ivan_296   Hello new user!   2022-01-31
+2022-01-31:36 : Hello new user!
+2022-01-31 New response
+2022-01-31:/api/genUserWithIpLog?isLog=1
+Admin request --- Controller 2022-01-31
+Admin request --- ControllerArgumentsEvent 2022-01-31
+checkEmailLog - User: mosts905755120@tut.by  email: Hello new user!   2022-01-31
+2022-01-31:37 : Hello new user!
+2022-01-31 New response
+2022-01-31:/api/genUserWithIpLog?isLog=0
+Admin request --- Controller 2022-01-31
+Admin request --- ControllerArgumentsEvent 2022-01-31
+checkEmailLog: Надо проверить - User: Ivan_270  email: mosts645582053@tut.by   2022-01-31
+2022-01-31:38 : Hello new user!
+2022-01-31 New response
+2022-01-31:/api/genUserWithIpLog?isLog=1
+Admin request --- Controller 2022-01-31
+Admin request --- ControllerArgumentsEvent 2022-01-31
+checkEmailLog: Надо проверить - User: Ivan_322  email: mosts1806226380@tut.by   2022-01-31
+2022-01-31:39 : Hello new user!
+2022-01-31 New response

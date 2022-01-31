@@ -6,6 +6,7 @@ use App\DataOperations\DataManager\UserDataManager;
 use App\DataOperations\DataProvider\UserDataProvider;
 use App\Entity\User;
 use App\Events\SendEmailEvent;
+use App\EventSubscriber\CheckEmailSubscriber;
 use App\Repository\UserRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
