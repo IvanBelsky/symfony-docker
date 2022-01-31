@@ -35,3 +35,8 @@ services:
         class: App\EventListener\LogResponseListener
         tags:
             - { name: kernel.event_listener, event: kernel.response, method: onKernelResponse }
+
+    email_send.listener:
+        class: App\EventListener\SendEmailListener
+        tags:
+            - { name: kernel.event_listener, event: send_email, method: onSendUserEmail }

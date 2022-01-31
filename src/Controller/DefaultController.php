@@ -5,9 +5,11 @@ namespace App\Controller;
 use App\DataOperations\DataManager\UserDataManager;
 use App\DataOperations\DataProvider\UserDataProvider;
 use App\Entity\User;
+use App\Events\SendEmailEvent;
 use App\Repository\UserRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -34,11 +36,13 @@ class DefaultController extends AbstractController
      * @Security(name="Bearer")
      *
      */
-    public function genUser(UserDataManager $userDataManager, Request $request): Response
+    public function genUser(UserDataManager $userDataManager, Request $request, EventDispatcherInterface $eventDispatcher): Response
     {
+
         $parameters = $request->query->all();
         $isLog = (int)$parameters['isLog'];
         $user = $userDataManager->addUser((bool)$isLog);
+        $eventDispatcher->dispatch(new SendEmailEvent($user,'Hello new user!'),SendEmailEvent::SEND_EMAIL);
         return new Response('Create a new record with id '
             .$user->getId().'  '.$user->getFirstName() . ($isLog ? 'with ip' : ''));
     }
