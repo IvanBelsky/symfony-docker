@@ -41,13 +41,18 @@
 
   <form action="{{ path('gen_user', { 'isLog': 0}) }}" method="POST">
 
-    <p style="text-align: center"><button > Добавление пользователя</button> </p>
+    <p style="text-align: center"><button > Добавление пользователя - gen_user -isLog = 0 </button> </p>
+  </form>
+
+  <form action="{{ path('show_form_add_new_user') }}" method="POST">
+
+    <p style="text-align: center"><button > Добавление пользователя с валидацией - createUser</button> </p>
   </form>
 
 
   <form action="{{ path('gen_user', { 'isLog': 1}) }}" method="POST">
 
-    <p style="text-align: center"><button > Добавление пользователя c логами IP</button> </p>
+    <p style="text-align: center"><button > Добавление пользователя c логами IP gen_user -isLog = 1</button> </p>
   </form>
 
 

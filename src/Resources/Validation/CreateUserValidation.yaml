@@ -1,0 +1,31 @@
+App\Dto\CreateUserDto:
+  properties:
+    email:
+      - NotBlank: { message: 'Values should not be blank' }
+      - Email:
+          message: The email "{{ value }}" is not a valid email.
+      - App\Validator\Constraints\NewUser:
+          message: 'Email exist'
+          message2: 'Email exist2'
+    age:
+#      - LessThanOrEqual: { value: 150, message: 'Value should be more than 5' }
+      - Range:
+          min: 16
+          max: 100
+          notInRangeMessage: You must be between {{ min }}years and {{ max }}years tall to enter
+    first_name:
+#      - NotBlank: {message: 'Short first name - Malo'}
+      - Length:
+          min: 2
+          max: 50
+          minMessage: 'Your first name must be at least {{ limit }} characters long'
+          maxMessage: 'Your first name cannot be longer than {{ limit }} characters'
+#    last_name:
+#      - NotBlank: {message: 'Short last name - Malo'}
+    password:
+      - NotBlank: {message: 'Short password name - Malo'}
+      - Length:
+            min: 6
+            max: 250
+            minMessage: 'Your password must be at least {{ limit }} characters long'
+            maxMessage: 'Your password cannot be longer than {{ limit }} characters'

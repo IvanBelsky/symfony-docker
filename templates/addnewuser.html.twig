@@ -1,0 +1,18 @@
+{% import "macro/core.twig" as core %}
+{% block body %}
+
+  <p>Добавление нового пользователя id= {{item}}<Br>
+  <form action="{{ path('create_user_api', { }) }}"
+        method="POST">
+  <p>Ваше имя: <input name="first_name" type="text" >
+     Ваша фамилия: <input name="last_name" type="text" > </p>
+  <p>Ваш возраст: <input type="text" name="age"> </p>
+  <p>Ваш email: <input type="text" name="email"> </p>
+  <p>Пароль (не менее 6 знаков): <input name="password" type="text" > </p>
+  <button>add user's</button>
+  </form>
+
+
+
+{% endblock %}
+
