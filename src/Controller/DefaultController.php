@@ -7,6 +7,7 @@ use App\DataOperations\DataProvider\UserDataProvider;
 use App\Entity\User;
 use App\Events\SendEmailEvent;
 use App\EventSubscriber\CheckEmailSubscriber;
+use App\Repository\ArticlesRepository;
 use App\Repository\UserRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -22,6 +23,21 @@ use OpenApi\Annotations as OA;
 
 class DefaultController extends AbstractController
 {
+
+    public function showArticles(ArticlesRepository $articlesRepository)
+    {
+        $listArticles = $articlesRepository->getListArticles();
+        $listArticlesArray = [];
+        foreach ($listArticles as $article) {
+            $listArticlesArray[] = [
+                'id'=>$article['id'],
+                'name' => $article['name']
+            ];
+        }
+        return $this->render('articles_show.html.twig',['items'=>$listArticlesArray, 'page'=>0]);
+
+    }
+
     /**
      * List the rewards of the specified user.
      *

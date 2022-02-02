@@ -1,0 +1,25 @@
+{% import "macro/core.twig" as core %}
+{% block body %}
+  {% set id = 1 %}
+Комментарии к статье
+
+  <br/> <br/>
+  <table>
+    <caption>Комментарии</caption>
+    <tr><th>log id</th><th>Коммент</th><th>Что-то еще</th></tr>
+
+    {% for item in comm %}
+    <tr>
+      <td>Id: {{item.id}} </td>
+      <td width="400"> {{item.content}} </td>
+      <td>{{item.date_created |date('Y-m-d')}} </td>
+      {% endfor %}
+  </table>
+  ----------------------------------------------
+  previous = {{ previous }}  next= {{ next }}
+  ---------------------------------------------
+
+
+{% endblock %}
+
+

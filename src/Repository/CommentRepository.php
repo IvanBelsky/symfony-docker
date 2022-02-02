@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Comment;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -14,10 +15,27 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class CommentRepository extends ServiceEntityRepository
 {
+    public const PAGINATOR_PER_PAGE =3;
+
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Comment::class);
     }
+
+
+    public function findAllComments(int $id, int $offset): Paginator
+    {
+        $query = $this->createQueryBuilder('c')
+            ->andWhere('c.articles = :id')
+            ->setParameter('id', $id)
+            ->setMaxResults(self::PAGINATOR_PER_PAGE)
+            ->setFirstResult($offset)
+            ->getQuery();
+        var_dump($query->getSQL());
+        return new Paginator($query);
+    }
+
+
 
     // /**
     //  * @return Comment[] Returns an array of Comment objects

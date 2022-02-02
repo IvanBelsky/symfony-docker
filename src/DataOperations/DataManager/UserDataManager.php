@@ -8,8 +8,6 @@ use App\DataOperations\DataProvider\UserDataProvider;
 use App\Entity\Comment;
 use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
-use phpDocumentor\Reflection\Types\Null_;
-use Symfony\Bundle\MakerBundle\Validator;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class UserDataManager

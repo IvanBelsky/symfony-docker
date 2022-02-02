@@ -63,10 +63,20 @@ any_my_name_7:
     methods: GET
     controller: App\Controller\DefaultController::addUser
 
+show_articles:
+    path: /api/showArticles
+    methods: GET
+    controller: App\Controller\DefaultController::showArticles
+
 show_users:
     path: /api/showUsers
     methods: GET
     controller: App\Controller\DefaultController::showUsers
+
+show_comments_by_id:
+    path: /api/comments/{id}/show/{page}
+    methods: GET
+    controller: App\Controller\ArticleController::showCommentsById
 
 #createUser:
 #    path: /create-user

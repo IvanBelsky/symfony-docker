@@ -33,6 +33,11 @@ class Comment
      */
     private $content;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Articles::class, inversedBy="id_comment")
+     */
+    private $articles;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -70,6 +75,18 @@ class Comment
     public function setContent(string $content): self
     {
         $this->content = $content;
+
+        return $this;
+    }
+
+    public function getArticles(): ?Articles
+    {
+        return $this->articles;
+    }
+
+    public function setArticles(?Articles $articles): self
+    {
+        $this->articles = $articles;
 
         return $this;
     }

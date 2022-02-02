@@ -7,9 +7,7 @@ namespace App\DataOperations\DataProvider;
 use App\Entity\User;
 use App\Repository\UserIpLogRepository;
 use App\Repository\UserRepository;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Tools\Pagination\Paginator;
-use Symfony\Bridge\Doctrine\ManagerRegistry;
 
 
 class UserDataProvider
