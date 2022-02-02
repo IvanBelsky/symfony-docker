@@ -2,13 +2,15 @@
 //Файл используется для: добавления, удаления, обновления
 namespace App\DataOperations\DataManager;
 
+use App\Dto\CreateUserDto;
 
 use App\DataOperations\DataProvider\UserDataProvider;
 use App\Entity\Comment;
 use App\Entity\User;
-use App\Entity\UserIpLog;
-use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use phpDocumentor\Reflection\Types\Null_;
+use Symfony\Bundle\MakerBundle\Validator;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class UserDataManager
 {
@@ -55,6 +57,40 @@ class UserDataManager
         return $user;
 
     }
+
+    public function addValidUser(array $data, ValidatorInterface $validator):array
+    {
+        $res = [];
+        $user = new User();
+        $dto = new CreateUserDto($data['email'], $data['first_name'], $data['last_name'],
+                   $data['password'], $data['age']);
+        $valid = $validator->validate($dto);
+        $errors = [];
+        if (0 !== count($valid)) {
+            foreach ($valid as $item) {
+                $errors[] = [
+                    'message' => $item->getMessage(),
+                    'field' => $item->getPropertyPath(),
+                ];
+            }
+            $res = ['user'=>$user, 'errors'=>$errors];
+            return $res;
+        }
+
+        $user->setEmail($data['email']);
+        $user->setPassword($data['password']);
+        $user->setDateCreated(new \DateTime());
+        $user->setAge($data['age']);
+        $user->setFirstName($data['first_name']);
+        $user->setLastName($data['last_name']);
+        $user->setIsActive(true);
+        $user->setRoles([]);
+        $this->entityManager->persist($user);
+        $this->entityManager->flush();
+        $res = ['user'=>$user, 'errors'=>$errors];
+            return $res;
+    }
+
 
     public function addUserComment(User $user, string $content):Comment
     {

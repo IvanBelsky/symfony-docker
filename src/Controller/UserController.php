@@ -4,28 +4,20 @@ namespace App\Controller;
 
 use App\Dto\CreateUserDto;
 use App\Form\CommentType;
-use FOS\RestBundle\Controller\Annotations as Rest;
 use OpenApi\Annotations as SWG;
 use Nelmio\ApiDocBundle\Annotation\Model;
 
 use App\DataOperations\DataManager\UserDataManager;
 use App\DataOperations\DataProvider\UserDataProvider;
 use App\Entity\User;
-use App\Repository\UserRepository;
-use phpDocumentor\Reflection\Types\Null_;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\Event\ResponseEvent;
-use Symfony\Component\Routing\Annotation\Route;
-
-use Nelmio\ApiDocBundle\Annotation\Security;
 
 use App\Repository\UserIpLogRepository;
-use Symfony\Component\Validator\Exception\ValidationFailedException;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class UserController extends AbstractController
@@ -133,14 +125,15 @@ class UserController extends AbstractController
      *
      * @return Response
      */
-    public function createUser(Request $request, ValidatorInterface $validator)
+    public function createUser(Request $request, ValidatorInterface $validator,
+                         UserDataManager $userDataManager )
     {
         $data = [];
         parse_str($request->getContent(), $data);
-
+        $res = $userDataManager->addValidUser($data, $validator);
       //  $data = json_decode($request->getContent(), true);
        // dd( $data); return 0;
-        $dto = new CreateUserDto($data['email'], $data['first_name'], $data['last_name'],
+     /*   $dto = new CreateUserDto($data['email'], $data['first_name'], $data['last_name'],
             $data['password'], $data['age']);
 
         $valid = $validator->validate($dto);
@@ -154,11 +147,29 @@ class UserController extends AbstractController
             }
             return new JsonResponse($errors);
         }
+     */
+        /*
+        $user = new User();
+        $user->setEmail($data['email']);
+        $user->setPassword($data['password']);
+        $user->setDateCreated(new \DateTime());
+        $user->setAge($data['age']);
+        $user->setFirstName($data['first_name']);
+        $user->setLastName($data['last_name']);
+        $user->setIsActive(true);
+        $user->setRoles([]);
+        $this->entityManager->persist($user);
+        $this->entityManager->flush();
+        */
      /*   $form = $this->createForm(CommentType::class);
         $form->submit($output);
         if (!$form->isValid()) {
             return new JsonResponse($this->getErrorMessages($form));
         }
-       */ return new JsonResponse('ok');
+       */
+     if (count($res['errors']) == 0) {
+         return new Response('ok');
+     }
+        return new JsonResponse($res['errors']);
     }
 }
