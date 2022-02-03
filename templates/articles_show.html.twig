@@ -8,7 +8,7 @@
     <tr>
       <td>Name: {{item.name | upper}}</td>
 
-      <td><form action="{{ path('show_comments_by_id', { 'id': item.id}, {'page':page}) }}"
+      <td><form action="{{ path('show_comments_by_id', { 'id': item.id, 'page':1}) }}"
                 method="POST">
           <button>show comments</button>
         </form>

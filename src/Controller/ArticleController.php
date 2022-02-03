@@ -25,6 +25,7 @@ class ArticleController extends AbstractController
         $arr = explode('/',$request->getRequestUri());
         $offset = intval( end($arr));
         $comm = $commentRepository->findAllComments($articles->getId(),$offset);
+
         $info = $articleDataProvider->getArticleComment($articles->getId(),$commentRepository);
         return $this->render('articles_comments_show.html.twig',['items'=>$articles->getIdComment()->toArray(),
             'info'=>$info, 'comm'=>$comm,

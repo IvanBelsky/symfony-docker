@@ -75,7 +75,7 @@ show_users:
 
 show_comments_by_id:
     path: /api/comments/{id}/show/{page}
-    methods: GET
+    methods: [GET,POST]
     controller: App\Controller\ArticleController::showCommentsById
 
 #createUser:
