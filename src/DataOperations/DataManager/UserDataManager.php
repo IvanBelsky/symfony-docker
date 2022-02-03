@@ -8,6 +8,8 @@ use App\DataOperations\DataProvider\UserDataProvider;
 use App\Entity\Comment;
 use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class UserDataManager
@@ -16,14 +18,21 @@ class UserDataManager
     private $userIpLogDataManager;
     private $userCommentDataManager;
     private $userDataProvider;
+    private $hasher;
 
-    public function __construct(EntityManagerInterface $entityManager, UserDataProvider $userDataProvider,
-                       UserIpLogDataManager $userIpLogDataManager, UserCommentDataManager $userCommentDataManager)
+    public function __construct(
+        EntityManagerInterface $entityManager,
+        UserDataProvider $userDataProvider,
+        UserIpLogDataManager $userIpLogDataManager,
+        UserCommentDataManager $userCommentDataManager,
+        UserPasswordHasherInterface $hasher
+    )
     {
         $this->entityManager = $entityManager;
         $this->userIpLogDataManager = $userIpLogDataManager;
         $this->userCommentDataManager = $userCommentDataManager;
         $this->userDataProvider = $userDataProvider;
+        $this->hasher = $hasher;
     }
 
     /**
@@ -40,7 +49,7 @@ class UserDataManager
     {
         $user = new User();
         $user->setEmail('mosts'.rand().'@tut.by');
-        $user->setPassword('qwe'.rand());
+        $user->setPassword($this->hasher->hashPassword($user, '123456'));
         $user->setDateCreated(new \DateTime());
         $user->setAge(rand(18,120));
         $user->setFirstName('Ivan_'.rand(1,500));
