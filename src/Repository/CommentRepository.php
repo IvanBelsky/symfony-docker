@@ -31,7 +31,7 @@ class CommentRepository extends ServiceEntityRepository
             ->setMaxResults(self::PAGINATOR_PER_PAGE)
             ->setFirstResult($offset)
             ->getQuery();
-        var_dump($query->getSQL());
+    //    var_dump($query->getSQL());
         return new Paginator($query);
     }
 

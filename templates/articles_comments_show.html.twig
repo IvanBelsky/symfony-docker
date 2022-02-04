@@ -19,6 +19,25 @@
   previous = {{ previous }}  next= {{ next }}
   ---------------------------------------------
 
+  {% if comm|length > 0 %}
+    <div>Найдено записей: {{ comm|length }}</div>
+
+    <br/> <br/>
+    {% if previous >= 0 %}
+      <a href="{{ path('show_comments_by_id', { 'id':  id, 'page':previous}) }}">Previous</a>
+    {% else %}Previous
+    {% endif %}
+
+    {% if next < comm|length %}
+      <a href="{{ path('show_comments_by_id', { 'id': id, 'page':next}) }}">Next</a>
+    {% else %}Next
+    {% endif %}
+
+  {% else %}
+    <div>Нет комментарев пользователей.</div>
+  {% endif %}
+  <a href="{{ path('show_articles') }}">   Вернуться к статьям</a>
+
 
 {% endblock %}
 

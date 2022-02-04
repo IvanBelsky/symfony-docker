@@ -80,21 +80,22 @@ class UserDataManager
                     'field' => $item->getPropertyPath(),
                 ];
             }
-            $res = ['user'=>$user, 'errors'=>$errors];
+            $res = ['user'=>$user->getEmail(), 'errors'=>$errors];
             return $res;
         }
 
         $user->setEmail($data['email']);
-        $user->setPassword($data['password']);
+    //    $user->setPassword($data['password']);
+        $user->setPassword($this->hasher->hashPassword($user, $data['password']));
         $user->setDateCreated(new \DateTime());
         $user->setAge($data['age']);
         $user->setFirstName($data['first_name']);
         $user->setLastName($data['last_name']);
         $user->setIsActive(true);
-        $user->setRoles([]);
+        $user->setRoles(['ROLE_USER']);
         $this->entityManager->persist($user);
         $this->entityManager->flush();
-        $res = ['user'=>$user, 'errors'=>$errors];
+        $res = ['user'=>$user->getEmail(), 'errors'=>$errors];
             return $res;
     }
 

@@ -40,3 +40,10 @@ services:
         class: App\EventListener\SendEmailListener
         tags:
             - { name: kernel.event_listener, event: send_email, method: onSendUserEmail }
+
+    logout.listener:
+        class: App\EventListener\CustomLogoutListener
+        tags:
+            - name: 'kernel.event_listener'
+              event: 'Symfony\Component\Security\Http\Event\LogoutEvent'
+              dispatcher: security.event_dispatcher.main

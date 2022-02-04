@@ -62,7 +62,7 @@ class UserDataProvider
 //    public function getUserIpLog(int $id, UserIpLogRepository $ipLogRepository):array
     {
       // return $ipLogRepository->findIpLogById($id);
-        return $ipLogRepository->findAllIp($id,2);
+        return $ipLogRepository->findAllIp($id,0);
 
     }
 

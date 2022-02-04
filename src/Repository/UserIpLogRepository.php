@@ -48,7 +48,7 @@ class UserIpLogRepository extends ServiceEntityRepository
                ." LIMIT ".$offset.", 5";
         $stmt = $conn->prepare($sql);
         $resultSet = $stmt->executeQuery([]);
-        var_dump($sql);
+       // var_dump($offset);
 
 
         $query = $this->createQueryBuilder('c')
@@ -57,7 +57,7 @@ class UserIpLogRepository extends ServiceEntityRepository
         ->setMaxResults(self::PAGINATOR_PER_PAGE)
         ->setFirstResult($offset)
         ->getQuery();
-        var_dump($query->getSQL());
+     //   var_dump($query->getSQL());
 //        $resultSet = $stmt->executeQuery(['user_id' => $id, 'page_size'=>$page_size]);
 
         // returns an array of arrays (i.e. a raw data set)

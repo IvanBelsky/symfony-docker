@@ -38,6 +38,12 @@ class DefaultController extends AbstractController
 
     }
 
+    public function login()
+    {
+        return $this->render('login.html.twig',[]);
+    }
+
+
     /**
      * List the rewards of the specified user.
      *
@@ -194,8 +200,8 @@ class DefaultController extends AbstractController
     }
 
     public function index()
-    {
-        return $this->render('base.html.twig');
+    {  // $ap=['user'=>false];
+        return $this->render('base.html.twig',[]);
     }
 
     public function addUser()

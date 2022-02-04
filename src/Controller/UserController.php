@@ -10,6 +10,7 @@ use Nelmio\ApiDocBundle\Annotation\Model;
 use App\DataOperations\DataManager\UserDataManager;
 use App\DataOperations\DataProvider\UserDataProvider;
 use App\Entity\User;
+use function Psr\Log\error;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\FormInterface;
@@ -126,12 +127,12 @@ class UserController extends AbstractController
      * @return Response
      */
     public function createUser(Request $request, ValidatorInterface $validator,
-                         UserDataManager $userDataManager )
+                         UserDataManager $userDataManager)
     {
         $data = [];
         parse_str($request->getContent(), $data);
         $res = $userDataManager->addValidUser($data, $validator);
-      //  $data = json_decode($request->getContent(), true);
+              //  $data = json_decode($request->getContent(), true);
        // dd( $data); return 0;
      /*   $dto = new CreateUserDto($data['email'], $data['first_name'], $data['last_name'],
             $data['password'], $data['age']);
@@ -168,7 +169,8 @@ class UserController extends AbstractController
         }
        */
      if (count($res['errors']) == 0) {
-         return new Response('ok');
+         //return $this->render('security/login.html.twig',['last_username'=>$res['user'], 'error'=>false]);
+         new Response('ok');
      }
         return new JsonResponse($res['errors']);
     }

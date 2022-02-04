@@ -8,7 +8,6 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\ControllerArgumentsEvent;
 use Symfony\Component\HttpKernel\Event\ControllerEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
-
 class LogIfAdminRouteSubscriber implements EventSubscriberInterface
 {
 
@@ -16,8 +15,8 @@ class LogIfAdminRouteSubscriber implements EventSubscriberInterface
     {
         return [
             KernelEvents::CONTROLLER=> ['logAdminLogin', 1],
-            KernelEvents::CONTROLLER_ARGUMENTS=>['arguments',0]
-        ];
+            KernelEvents::CONTROLLER_ARGUMENTS=>['arguments',0],
+                ];
 
         // TODO: Implement getSubscribedEvents() method.
     }

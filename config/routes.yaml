@@ -54,7 +54,7 @@ delete_user_by_id:
     controller: App\Controller\DefaultController::deleteById
 
 any_my_name_6:
-    path: /api/index
+    path: /index
     methods: GET
     controller: App\Controller\DefaultController::index
 
@@ -77,6 +77,15 @@ show_comments_by_id:
     path: /api/comments/{id}/show/{page}
     methods: [GET,POST]
     controller: App\Controller\ArticleController::showCommentsById
+
+login:
+    path: /login
+    methods: [GET,POST]
+    controller: App\Controller\Defaultcontroller::login
+logout:
+    path: /index
+    methods: [GET,POST]
+    controller: App\Controller\Defaultcontroller::index
 
 #createUser:
 #    path: /create-user

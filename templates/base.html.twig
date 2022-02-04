@@ -18,6 +18,10 @@
     <button onclick="document.location='{{ path('show_users') }}'">Просмотр всех пользователей</button>
     <button onclick="document.location='{{ path('show_articles') }}'">Просмотр всех статей</button>
 
+      <button onclick="document.location='{{ path('logout') }}'">Выйти</button>
+
+        <button onclick="document.location='{{ path('login') }}'">Войти</button>
+
 
         {% block body %}
         {% endblock %}
