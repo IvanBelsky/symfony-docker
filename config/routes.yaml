@@ -82,6 +82,7 @@ login:
     path: /login
     methods: [GET,POST]
     controller: App\Controller\Defaultcontroller::login
+
 logout:
     path: /index
     methods: [GET,POST]

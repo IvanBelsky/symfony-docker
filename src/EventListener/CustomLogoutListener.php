@@ -24,7 +24,7 @@ class CustomLogoutListener
         $file = '/text.log';
         $file = '/var/www/symfony/src/EventListener'.$file;
         $c = file_get_contents($file);
-        $c .= 'LogOut -- '.(new \DateTime())->format('Y-m-d')."\n";
+        $c .= '--LogOut -- '.(new \DateTime())->format('Y-m-d')."\n";
         file_put_contents($file, $c);
     }
 }

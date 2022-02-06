@@ -42,7 +42,8 @@ class UserDataProvider
         $listUsersArray[] = [
             'id' => $user->getId(),
             'name' => $user->getFirstName(),
-            'email' =>$user->getEmail()
+            'email' =>$user->getEmail(),
+            'roles'=>$user->getRoles()
         ];
 
         return $listUsersArray;

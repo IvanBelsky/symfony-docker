@@ -36,6 +36,11 @@ services:
         tags:
             - { name: kernel.event_listener, event: kernel.response, method: onKernelResponse }
 
+    log_Exception.listener:
+        class: App\EventListener\LogExceptionListener
+        tags:
+            - { name: kernel.event_listener, event: kernel.exception, method: onKernelException }
+
     email_send.listener:
         class: App\EventListener\SendEmailListener
         tags:

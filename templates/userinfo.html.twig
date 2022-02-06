@@ -3,7 +3,9 @@
   {% set id = 1 %} <br/> <br/>
   Информация по пользователю
   {% for item in info %}
-     id: {{ item.id }},  FirstName: {{ item.name }},  email: {{ item.email }}
+     id: {{ item.id }},  FirstName: {{ item.name }},  email: {{ item.email }}  <br/> <br/>
+    Права пользователя:
+    {{ item.roles|json_encode() }}
   {% set id = item.id %}
   {% endfor %}  <br/> <br/>
   <br/> <br/>

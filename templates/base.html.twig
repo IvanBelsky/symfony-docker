@@ -18,10 +18,11 @@
     <button onclick="document.location='{{ path('show_users') }}'">Просмотр всех пользователей</button>
     <button onclick="document.location='{{ path('show_articles') }}'">Просмотр всех статей</button>
 
-      <button onclick="document.location='{{ path('logout') }}'">Выйти</button>
-
+    {% if app.user %}
+      <button onclick="document.location='{{ path('app_logout') }}'">Выйти</button>
+    {% else %}
         <button onclick="document.location='{{ path('login') }}'">Войти</button>
-
+    {% endif %}
 
         {% block body %}
         {% endblock %}
