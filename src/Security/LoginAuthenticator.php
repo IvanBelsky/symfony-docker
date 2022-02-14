@@ -67,7 +67,7 @@ class LoginAuthenticator extends AbstractLoginFormAuthenticator
 
         // For example:
         return new RedirectResponse($this->urlGenerator->generate('any_my_name_6'));
-        //throw new \Exception('TODO: provide a valid redirect inside '.__FILE__);
+       // throw new \Exception('TODO: provide a valid redirect inside '.__FILE__);
     }
 
     public function onAuthenticationFailure(Request $request, AuthenticationException $exception): Response

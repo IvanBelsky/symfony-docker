@@ -1,0 +1,9 @@
+     command  docker volume create --opt type=none --opt device="/home/andrey/PhpProjects/symfony-docker/" --opt o=bind --name symfony_docker_app_sync
+     success  Docker volume for symfony_docker_app_sync created
+     success  Watcher disabled by configuration
+     command  docker volume create --opt type=none --opt device="/home/andrey/PhpProjects/symfony-docker/" --opt o=bind --name symfony_docker_app_sync
+     success  Docker volume for symfony_docker_app_sync created
+     success  Watcher disabled by configuration
+     command  docker volume create --opt type=none --opt device="/home/andrey/PhpProjects/symfony-docker/" --opt o=bind --name symfony_docker_app_sync
+     success  Docker volume for symfony_docker_app_sync created
+     success  Watcher disabled by configuration
