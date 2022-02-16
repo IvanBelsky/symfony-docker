@@ -22,6 +22,7 @@ class UserIpLogDataManager
         $userIpLog->setDateCreated(new \DateTime());
         $userIpLog->setIpAdr('192.168.58.'.rand(1,254));
         $userIpLog->setUser($user);
+        $userIpLog->setId2(0);
         $this->entityManager->persist($userIpLog);
         $this->entityManager->flush();
 

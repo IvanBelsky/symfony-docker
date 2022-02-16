@@ -161,17 +161,25 @@ class DefaultController extends AbstractController
            return $this->render('content1.html.twig',['items'=>$listUsersArray]);
        }
    */
-       public function showUsers(UserRepository $userRepository)
+       public function showUsers(UserRepository $userRepository, Request $request)
         {
-            $listUsers = $userRepository->getListUsers();
-            $listUsersArray = [];
+            $arr = explode('/',$request->getRequestUri());
+            $offset = intval( end($arr));
+
+            $listUsers = $userRepository->getListUsers($offset);
+   /*         $listUsersArray = [];
             foreach ($listUsers as $user) {
                 $listUsersArray[] = [
                     'id' => $user['id'],
                     'name' => $user['firstName']
                 ];
             }
-            return $this->render('content1.html.twig',['items'=>$listUsersArray, 'page'=>0]);
+     */
+          //  return $this->render('content1.html.twig',['items'=>$listUsersArray, 'page'=>0]);
+            return $this->render('content1.html.twig',['items'=>$listUsers,
+                'previous' => $offset - UserRepository::PAGINATOR_PER_PAGE,
+                'next' => min(count($listUsers), $offset + UserRepository::PAGINATOR_PER_PAGE),
+                'page'=>0]);
         }
 
 

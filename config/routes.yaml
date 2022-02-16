@@ -69,7 +69,7 @@ show_articles:
     controller: App\Controller\DefaultController::showArticles
 
 show_users:
-    path: /api/showUsers
+    path: /api/showUsers/{page}
     methods: GET
     controller: App\Controller\DefaultController::showUsers
 

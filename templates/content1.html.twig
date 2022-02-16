@@ -6,7 +6,7 @@
   <table>
   {% for item in items %}
   <tr>
-    <td>Name: {{item.name | upper}}</td>
+    <td>Name: {{item.firstname | upper}}</td>
     <td>IP: {{'        '}}</td>
     <td>Id: {{item.id}} -</td>
     <td><form action="{{ path('show_user_by_id', { 'id': item.id}) }}"
@@ -39,20 +39,33 @@
   </table>
 
 
+  <br/> <br/>
+  {% if previous >= 0 %}
+    <a href="{{ path('show_users', {'page':previous}) }}">Previous</a>
+  {% else %}Previous
+  {% endif %}
+
+  {% if next < items|length %}
+    <a href="{{ path('show_users', {'page':next}) }}">Next</a>
+  {% else %}Next
+  {% endif %}
+  <br/> <br/>
+
+
   <form action="{{ path('gen_user', { 'isLog': 0}) }}" method="POST">
 
-    <p style="text-align: center"><button > Добавление пользователя - gen_user -isLog = 0 </button> </p>
+    <p style="text-align: left"><button > Добавление пользователя - gen_user -isLog = 0 </button> </p>
   </form>
 
   <form action="{{ path('show_form_add_new_user') }}" method="POST">
 
-    <p style="text-align: center"><button > Добавление пользователя с валидацией - createUser</button> </p>
+    <p style="text-align: left"><button > Добавление пользователя с валидацией - createUser</button> </p>
   </form>
 
 
   <form action="{{ path('gen_user', { 'isLog': 1}) }}" method="POST">
 
-    <p style="text-align: center"><button > Добавление пользователя c логами IP gen_user -isLog = 1</button> </p>
+    <p style="text-align: left"><button > Добавление пользователя c логами IP gen_user -isLog = 1</button> </p>
   </form>
 
 

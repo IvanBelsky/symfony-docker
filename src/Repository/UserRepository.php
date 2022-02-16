@@ -6,6 +6,7 @@ use App\Entity\User;
 use App\Entity\UserIpLog;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\Query\Expr\Join;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -20,6 +21,8 @@ use Symfony\Component\Security\Core\User\PasswordUpgraderInterface;
  */
 class UserRepository extends ServiceEntityRepository implements PasswordUpgraderInterface
 {
+    public const PAGINATOR_PER_PAGE =6;
+
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, User::class);
@@ -38,6 +41,23 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         $this->_em->persist($user);
         $this->_em->flush();
     }
+
+//    public function getListUsers(): array
+    public function getListUsers(int $offset): Paginator
+    {
+        $qb =$this->createQueryBuilder('u')
+/*            ->select([
+                'u.id',
+                'u.firstName',
+            ])
+  */          ->setMaxResults(self::PAGINATOR_PER_PAGE)
+            ->setFirstResult($offset)
+            ->getQuery();
+          //  ->getResult();
+
+        return new Paginator($qb);
+    }
+
 
     public function getUserById():User
     {
@@ -73,18 +93,6 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
     }
     */
 
-    public function getListUsers(): array
-    {
-        $qb =$this->createQueryBuilder('u')
-            ->select([
-                'u.id',
-                'u.firstName',
-            ])
-            ->getQuery()
-            ->getResult();
-
-        return $qb;
-    }
 
     /*
     public function getListUsers(): array
