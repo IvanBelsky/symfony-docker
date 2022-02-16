@@ -21,7 +21,8 @@
     {% if app.user %}
       <button onclick="document.location='{{ path('app_logout') }}'">Выйти</button>
     {% else %}
-        <button onclick="document.location='{{ path('login') }}'">Войти</button>
+      <button onclick="document.location='{{ path('login') }}'">Войти</button>
+      <button onclick="document.location='{{ path('show_form_add_new_user') }}'">Регистрация</button>
     {% endif %}
 
         {% block body %}

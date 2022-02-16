@@ -29,6 +29,10 @@ security:
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#the-firewall
 
+            entry_point: App\Security\AuthenticationEntryPoint
+
+            access_denied_handler: App\Security\AccessDeniedHandler
+
             # https://symfony.com/doc/current/security/impersonating_user.html
             # switch_user: true
 

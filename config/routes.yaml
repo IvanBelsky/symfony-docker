@@ -19,7 +19,7 @@ create_user_api:
 
 show_form_add_new_user:
     path: /api/user/new
-    methods: POST
+    methods: [GET,POST]
     controller: App\Controller\UserController::showFormAddNewUser
 
 
