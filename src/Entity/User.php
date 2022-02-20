@@ -72,10 +72,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $addresses;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Articles::class, mappedBy="行撔User", orphanRemoval=true)
+     */
+    private $articles;
+
     public function __construct()
     {
         $this->comments = new ArrayCollection();
         $this->addresses = new ArrayCollection();
+        $this->articles = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -287,6 +293,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             // set the owning side to null (unless already changed)
             if ($address->getUser() === $this) {
                 $address->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Articles[]
+     */
+    public function getArticles(): Collection
+    {
+        return $this->articles;
+    }
+
+    public function addArticle(Articles $article): self
+    {
+        if (!$this->articles->contains($article)) {
+            $this->articles[] = $article;
+            $article->set行撔User($this);
+        }
+
+        return $this;
+    }
+
+    public function removeArticle(Articles $article): self
+    {
+        if ($this->articles->removeElement($article)) {
+            // set the owning side to null (unless already changed)
+            if ($article->get行撔User() === $this) {
+                $article->set行撔User(null);
             }
         }
 
