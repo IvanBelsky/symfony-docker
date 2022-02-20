@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+{% import "macro/core.twig" as core %}
+{% block body %}
+<br/> <br/>
+
+  <p>Добавление нового адреса для пользователя id= {{item}}<Br>
+    <form action="{{ path('add_user_address', { 'id': item}) }}"
+          method="POST">
+  <p>Почтовый индекс: <input name="zipcode" type="text" >
+    Город: <input name="town" type="text" > </p>
+  <p>Улица: <input type="text" name="street"> </p>
+  <p>Дом: <input type="text" name="house"> </p>
+  <p>Квартира: <input name="flat" type="text"> </p>
+  <br/> <br/>
+  <button>Добавить</button>
+  </form>
+
+{% endblock %}

@@ -12,6 +12,16 @@ gen_user:
     methods: POST
     controller: App\Controller\DefaultController::genUser
 
+show_form_add_user_address_by_id:
+    path: /api/user/{id}/address/new
+    methods: [GET]
+    controller: App\Controller\UserController::showFormAddUserAddress
+
+add_user_address:
+    path: /api/user/{id}/address
+    methods: POST
+    controller: App\Controller\UserController::addUserAddress
+
 create_user_api:
     path: /api/user
     methods: POST

@@ -29,6 +29,13 @@
         <button>add comment</button>
       </form>
     </td>
+    <td><!--<form action="{{ path('show_form_add_user_address_by_id', { 'id': item.id}) }}"
+              method="POST">
+        <button>add address</button>
+
+      </form>-->
+      <a href="{{ path('show_form_add_user_address_by_id', { 'id': item.id}) }}">add Address</a>
+    </td>
     <td><form action="{{ path('delete_user_by_id', { 'id': item.id}) }}"
               method="POST">
         <button>delete</button>

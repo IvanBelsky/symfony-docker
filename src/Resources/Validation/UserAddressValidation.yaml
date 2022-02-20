@@ -1,0 +1,9 @@
+App\Dto\UserAddressDto:
+  properties:
+    town:
+      - NotBlank: {message: 'Short password name - Malo'}
+      - Length:
+          min: 2
+          max: 15
+          minMessage: 'Your password must be at least {{ limit }} characters long'
+          maxMessage: 'Your password cannot be longer than {{ limit }} characters'

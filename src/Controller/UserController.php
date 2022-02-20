@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use App\Dto\CreateUserDto;
+use App\Form\AddressType;
 use App\Form\CommentType;
 use OpenApi\Annotations as SWG;
 use Nelmio\ApiDocBundle\Annotation\Model;
@@ -25,7 +25,7 @@ class UserController extends AbstractController
 {
     /**
      * @SWG\Post(
-     *      summary="Add comment",
+     *      summary="UserController, function addComment",
      *      @SWG\RequestBody(
      *          description="",
      *          @Model(type=\App\Form\CommentType::class)
@@ -67,14 +67,69 @@ class UserController extends AbstractController
     }
 
     /**
-    * @Entity("$user", expr="repository.find(id)")
-    * @param User $user
-    * @return Response
-    */
+     * @Entity("$user", expr="repository.find(id)")
+     * @param User $user
+     * @return Response
+     */
     public function showFormAddComment(User $user)
     {
-                return $this->render('usercommentadd.html.twig',['item'=>$user->getId()]);
+        return $this->render('usercommentadd.html.twig',['item'=>$user->getId()]);
     }
+
+    /**
+     * @Entity("$user", expr="repository.find(id)")
+     * @param User $user
+     * @return Response
+     */
+    public function showFormaddUserAddress(User $user)
+    {
+        return $this->render('addUserAddress.html.twig',['item'=>$user->getId()]);
+    }
+
+//    public function addUserAddress(User $user, UserDataManager $userDataManager, Request $request): Response
+    /**
+     * @SWG\Post(
+     *      summary="UserController, function addAddress",
+     *      @SWG\RequestBody(
+     *          description="",
+     *          @Model(type=\App\Form\AddressType::class)
+     *      )
+     * )
+     * @Entity("$user", expr="repository.find(id)")
+     * @SWG\Tag(name="users")
+     *
+     * @param User $user
+     *
+     * @return Response
+     */
+    public function addUserAddress(Request $request, User $user, UserDataManager $userDataManager): Response
+    {
+        //parse_str($request->getContent(), $data);
+        //$data = json_decode($request->getContent(), true);
+        $data = [];
+        parse_str($request->getContent(), $data);
+        //dd($output);
+        $response = $userDataManager->addUserAddress($data, $user);
+        return new Response('ok');
+
+//        $output = [];
+//        parse_str($request->getContent(), $output);
+//        $id = $request->query->get('item');
+//      //  return new JsonResponse($output);
+//        // $data = json_decode($request->getContent(), true);
+//        $form = $this->createForm(AddressType::class);
+//        $form->submit($output);
+//        if (!$form->isValid()) {
+//         //   return new Response('Not ok');
+//            return new JsonResponse($this->getErrorMessages($form));
+//        }
+//        return new Response('ok');
+//      //  $comment = $userDataManager->addUserComment($user,$output['comment']);
+//        return new Response('Все ок. Коммент='.$output['comment'].'  Дата = '.$output['calendar']);
+
+    }
+
+
 
     public function showFormAddNewUser()
     {

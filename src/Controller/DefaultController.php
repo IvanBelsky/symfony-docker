@@ -71,16 +71,8 @@ class DefaultController extends AbstractController
     }
 
     /**
-     * List the rewards of the specified user.
+     * Show short user info.
      *
-     * This call takes into account all confirmed awards, but not pending or refused awards.
-     *
-     * @OA\Parameter(
-     *     name="order",
-     *     in="query",
-     *     description="The field used to order rewards",
-     *     @OA\Schema(type="string")
-     * )
      * @OA\Tag(name="ind4")
      * @Security(name="Bearer")
      *
@@ -93,6 +85,7 @@ class DefaultController extends AbstractController
     }
 
     /**
+     * Defaultcontroller, function genComment
      * @Entity("$user", expr="repository.find(id)")
      *
      * @param User $user
@@ -165,6 +158,11 @@ class DefaultController extends AbstractController
         {
             $arr = explode('/',$request->getRequestUri());
             $offset = intval( end($arr));
+
+         //   $parameters = $request->query; //->all();
+        //    $isLog = (int)$parameters['page'];
+
+         //   dd( $parameters);
 
             $listUsers = $userRepository->getListUsers($offset);
    /*         $listUsersArray = [];

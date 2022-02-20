@@ -5,6 +5,8 @@ namespace App\DataOperations\DataManager;
 use App\Dto\CreateUserDto;
 
 use App\DataOperations\DataProvider\UserDataProvider;
+use App\Dto\UserAddressDto;
+use App\Entity\Address;
 use App\Entity\Comment;
 use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
@@ -18,13 +20,15 @@ class UserDataManager
     private $userCommentDataManager;
     private $userDataProvider;
     private $hasher;
+    private $validator;
 
     public function __construct(
         EntityManagerInterface $entityManager,
         UserDataProvider $userDataProvider,
         UserIpLogDataManager $userIpLogDataManager,
         UserCommentDataManager $userCommentDataManager,
-        UserPasswordHasherInterface $hasher
+        UserPasswordHasherInterface $hasher,
+        ValidatorInterface $validator
     )
     {
         $this->entityManager = $entityManager;
@@ -32,6 +36,7 @@ class UserDataManager
         $this->userCommentDataManager = $userCommentDataManager;
         $this->userDataProvider = $userDataProvider;
         $this->hasher = $hasher;
+        $this->validator = $validator;
     }
 
     /**
@@ -111,5 +116,32 @@ class UserDataManager
         $this->entityManager->flush();
 
         return $comment;
+    }
+
+    public function addUserAddress(array $data, User $user)
+    {
+        $dto = new UserAddressDto($data['town'], $user);
+        $valid = $this->validator->validate($dto);
+        $errors = [];
+        if (0 !== count($valid)) {
+            foreach ($valid as $item) {
+                $errors[] = [
+                    'message' => $item->getMessage(),
+                    'field' => $item->getPropertyPath(),
+                ];
+            }
+            return ['user'=>$user->getEmail(), 'errors'=>$errors];
+        }
+
+        $address = new Address();
+        $address->setUser($dto->getUser());
+        $address->setTown($dto->getTown());
+
+        //$user->addAddress($address);
+
+        $this->entityManager->persist($address);
+        $this->entityManager->flush();
+
+        return [];
     }
 }
