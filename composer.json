@@ -30,8 +30,14 @@
     "zircote/swagger-php": "^4.2"
   },
   "require-dev": {
+    "dbrekelmans/bdi": "^1.0",
     "doctrine/doctrine-fixtures-bundle": "^3.4",
+    "phpunit/phpunit": "^9.5",
+    "symfony/browser-kit": "5.3.*",
+    "symfony/css-selector": "5.3.*",
     "symfony/maker-bundle": "^1.14",
+    "symfony/panther": "^2.0",
+    "symfony/phpunit-bridge": "^6.0",
     "symfony/stopwatch": "5.3.*",
     "symfony/web-profiler-bundle": "5.3.*"
   },
